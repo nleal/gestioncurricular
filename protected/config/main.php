@@ -85,7 +85,7 @@ return array(
 			'connectionString' => 'mysql:host=localhost;dbname=gcnueva',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => 'root',
+			'password' => '19020820',
 			'charset' => 'utf8',
 		),
 
