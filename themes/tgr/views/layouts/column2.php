@@ -8,14 +8,14 @@
 <div class="span-5 last">
 	<div id="sidebar">
 	<?php
-		$this->beginWidget('zii.widgets.CPortlet', array(
-			'title'=>'Operaciones',
+		/*$this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Operacionesqqqqqq',
 		));
 		$this->widget('zii.widgets.CMenu', array(
 			'items'=>$this->menu,
 			'htmlOptions'=>array('class'=>'operations'),
 		));
-		$this->endWidget();
+		$this->endWidget();*/
 	?>
 	</div><!-- sidebar -->
 </div>

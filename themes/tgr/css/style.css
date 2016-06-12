@@ -968,9 +968,9 @@ span.art-button-wrapper input
 }
 .art-vmenublock:before, .art-vmenublock:after 
 {
-   content: url('/gc/themes/tgr/images/vmenublock_t.png');
+   /*content: url('/gc/themes/tgr/images/vmenublock_t.png');*/
    font-size: 0;
-   background-image: url('/gc/themes/tgr/images/vmenublock_b.png');
+   /*background-image: url('/gc/themes/tgr/images/vmenublock_b.png');*/
 }
 .art-vmenublock:after{
    clip:rect(auto, auto, auto, 783px);
@@ -982,7 +982,7 @@ span.art-button-wrapper input
    width: 1px;
    top:1px;
    bottom:1px;
-   background-image:url('/gc/themes/tgr/images/vmenublock.png');
+   /*background-image:url('/gc/themes/tgr/images/vmenublock.png');*/
 }
 .art-vmenublock-body:before{
    top:1px;
@@ -1063,7 +1063,7 @@ ul.art-vmenu li{
 ul.art-vmenu>li>a 
 {
    color: #E9E9E9;
-   padding: 0 20px 0 32px;
+   padding: 0 20px 0 24px;
    height: 28px;
    line-height: 28px;
    white-space: nowrap;
@@ -1082,7 +1082,10 @@ ul.art-vmenu>li>a:before, ul.art-vmenu>li>a:after
    display: block;
    content: ' ';
    z-index:-1;
-   background-image: url('/gc/themes/tgr/images/vmenuitem.png');
+   /*background-image: url('/gc/themes/tgr/images/vmenuitem.png');*/
+   background-color: #0084C2; /*Fondo del menu*/
+   box-shadow: 0px -2px 0px 0px rgba(0, 0, 0, 0.5) inset;
+   border-radius: 2px;
    top:0;
    height:28px;
 }
@@ -1544,7 +1547,7 @@ span.art-postdateicon:after
 
 .art-postcontent ul>li
 {
-   background-image: url('/gc/themes/tgr/images/postbullets.png');
+   /*background-image: url('/gc/themes/tgr/images/postbullets.png');*/
    background-repeat: no-repeat;
    background-position: top left;
    padding-left: 16px;
@@ -1723,6 +1726,7 @@ div.art-footer img
 .art-content-layout .art-sidebar1
 {
    width: 175px;
+   background: #F8F8F8 none repeat scroll 0% 0%;/*Fondo de la segunda columna*/
 }
 .art-content-layout .art-sidebar1:before
 {
@@ -1740,4 +1744,11 @@ div.art-footer img
 }
 /* end LayoutCell, sidebar1 */
 
+.portlet-decoration{
+
+padding: 3px 8px;
+background: #B7D6E7 none repeat scroll 0% 0%;
+border-left: 5px solid #6FACCF;
+
+}
 

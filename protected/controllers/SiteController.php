@@ -341,6 +341,77 @@ class SiteController extends Controller
 	}else return null;
 	
 	}    
-	    
+   
+   
+	/**
+	* @param string id
+	* @return string 
+	* @soap
+	*/    
+	    public function getConsulta_pensum(){
+			
+			$evaluacion = Yii::app()->db->createCommand("SELECT a.id_departamento , b.nombre, a.file ".
+														"FROM pensumhistorico as a ".
+														"inner join departamento as b on a.id_departamento = b.id_departamento ".
+														"WHERE a.status='1'")->queryAll();
+
+
+			if(count($evaluacion)>0){
+					foreach($evaluacion as $it){
+						$res_js[] = array("id_departamento"=>$it['id_departamento'],"nombre"=>$it['nombre'],"file"=>$it['file']); 
+					}
+					
+					return json_encode($res_js);
+			}else return null;
+						
+	    }
+
+   
+	/**
+	* @param string id
+	* @return string 
+	* @soap
+	*/    
+	    public function getInactivos($uname){
+			
+			$evaluacion = Yii::app()->db->createCommand("SELECT a.id_departamento , b.nombre, a.file ".
+														"FROM pensumhistorico as a ".
+														"inner join departamento as b on a.id_departamento = b.id_departamento ".
+														"WHERE a.status='2' and b.id_departameto = '".$uname."' ")->queryAll();
+
+
+			if(count($evaluacion)>0){
+					foreach($evaluacion as $it){
+						$res_js[] = array("id_departamento"=>$it['id_departamento'],"nombre"=>$it['nombre'],"file"=>$it['file']); 
+					}
+					
+					return json_encode($res_js);
+			}else return null;
+						
+	    }
+
+   	    
+	/**
+	* @param string id
+	* @return string 
+	* @soap
+	*/    
+	    public function getViejos($uname){
+			
+			$evaluacion = Yii::app()->db->createCommand("SELECT a.id_departamento , b.nombre, a.file ".
+														"FROM pensumhistorico as a ".
+														"inner join departamento as b on a.id_departamento = b.id_departamento ".
+														"WHERE a.status='2' and b.id_departamento = '".$uname."' ")->queryAll();
+
+
+			if(count($evaluacion)>0){
+					foreach($evaluacion as $it){
+						$res_js[] = array("id_departamento"=>$it['id_departamento'],"nombre"=>$it['nombre'],"file"=>$it['file']); 
+					}
+					
+					return json_encode($res_js);
+			}else return null;
+						
+	    }
 	    
 }

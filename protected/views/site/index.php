@@ -5,6 +5,7 @@ $this->pageTitle=Yii::app()->name;
 ?>
 
 
-
-<p>Bienvenidos al sistema curricular de Facyt </p>
+<div style="text-align:center">
+<p>Bienvenidos curricular de Facyt </p>
+</div>
 

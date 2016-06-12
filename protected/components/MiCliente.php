@@ -70,4 +70,15 @@ class MiCliente extends CApplicationComponent
 		return $this->getClienteInt()->getResport_Actas($uname);
 	}
 	
+	public function consulta_pensum(){
+		error_log('h');
+		return $this->getClienteInt()->getConsulta_pensum();
+	}
+	
+	public function inactivos_pensum($uname){
+		error_log('Username: '.$uname);
+		return $this->getClienteInt()->getViejos($uname);
+	}
+	
+	
 } 

@@ -3,7 +3,7 @@
 /* @var $data Materia */
 ?>
 
-<div class="view">
+<div 
 
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('nombre_mat')); ?>:</b>

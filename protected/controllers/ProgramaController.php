@@ -1,6 +1,6 @@
 <?php
 
-class AgendaController extends Controller
+class ProgramaController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -29,18 +29,15 @@ class AgendaController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
-				//'users'=>array('*'),
-				'roles'=>array('admin'),
+				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
-				//'users'=>array('*'),
-				'roles'=>array('admin'),
+				'users'=>array('*'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				//'users'=>array('*'),
-				'roles'=>array('admin'),
+				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -65,16 +62,31 @@ class AgendaController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Agenda;
+		$model=new Programa;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Agenda']))
+		if(isset($_POST['Programa']))
 		{
-			$model->attributes=$_POST['Agenda'];
+			$model->attributes=$_POST['Programa'];
+			$tempSave=CUploadedFile::getInstance($model, 'file');
+			
+			$id=rand(10,99);
+			
+			$model->file = $tempSave.'_'.$id.'.pdf';
+			
+			foreach ($_REQUEST['CB'] as $checkboxes => $CB){
+				
+			//$model->file = 'id_materia'=>$CB;
+			 
+			
+			}
+			
+			
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_agenda));
+				$tempSave->saveAs(Yii::app()->basePath.'/../uploads/' . $tempSave.'_'.$id.'.pdf');
+				$this->redirect(array('view','id'=>$model->id_programa));
 		}
 
 		$this->render('create',array(
@@ -94,11 +106,11 @@ class AgendaController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Agenda']))
+		if(isset($_POST['Programa']))
 		{
-			$model->attributes=$_POST['Agenda'];
+			$model->attributes=$_POST['Programa'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_agenda));
+				$this->redirect(array('view','id'=>$model->id_programa));
 		}
 
 		$this->render('update',array(
@@ -125,7 +137,7 @@ class AgendaController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Agenda');
+		$dataProvider=new CActiveDataProvider('Programa');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -136,10 +148,10 @@ class AgendaController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Agenda('search');
+		$model=new Programa('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Agenda']))
-			$model->attributes=$_GET['Agenda'];
+		if(isset($_GET['Programa']))
+			$model->attributes=$_GET['Programa'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -150,12 +162,12 @@ class AgendaController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Agenda the loaded model
+	 * @return Programa the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Agenda::model()->findByPk($id);
+		$model=Programa::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -163,11 +175,11 @@ class AgendaController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Agenda $model the model to be validated
+	 * @param Programa $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='agenda-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='programa-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

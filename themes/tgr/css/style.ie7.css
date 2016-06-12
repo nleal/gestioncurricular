@@ -218,10 +218,10 @@ ul.art-hmenu>li:first-child {
 
 /* begin Box, Block, VMenuBlock */
 .art-vmenublock>.art-box-tl, .art-vmenublock>.art-box-tr{
-   background-image: url('images/vmenublock_t.png');
+   /*background-image: url('images/vmenublock_t.png');*/
 }
 .art-vmenublock>.art-box-bl, .art-vmenublock>.art-box-br {
-   background-image: url('images/vmenublock_b.png');
+   /*background-image: url('images/vmenublock_b.png');*/
 }
 .art-vmenublock>.art-box-tl, .art-vmenublock>.art-box-bl, .art-vmenublock>.art-box-cl{
    right:1px;
@@ -232,7 +232,7 @@ ul.art-hmenu>li:first-child {
 .art-vmenublock>.art-box-cl, .art-vmenublock>.art-box-cr{
    top:1px;
    bottom:1px;
-   background-image:url('images/vmenublock.png');
+   /*background-image:url('images/vmenublock.png');*/
 }
 /* end Box, Block, VMenuBlock */
 

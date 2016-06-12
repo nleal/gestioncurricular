@@ -36,9 +36,19 @@
 		'id'=>'art-hmenu',	
                 'items'=>array(
                                 array('label'=>'Inicio', 'url'=>array('/site/index')),
-                                array('label'=>'Pensum', 'url'=>array('/departamento/computacion')),
-                                array('label'=>'Programa', 'url'=>array('/materia/create')),
-                                array('label'=>'Historico', 'url'=>array('/materia/lista_materia')),           
+                                array('label'=>'Pensum', 'url'=>array(''),'visible'=>!Yii::app()->user->isGuest,
+                                'items'=>array(
+										array('label'=>'Cargar', 'url'=>array('/pensumhistorico/create')),
+                                        array('label'=>'Consultar', 'url'=>array('/pensumhistorico/listar')),
+										)),
+                                array('label'=>'Programa', 'url'=>array(''),'visible'=>!Yii::app()->user->isGuest,
+										'items'=>array(
+										array('label'=>'Cargar', 'url'=>array('/programa/create')),
+                                        array('label'=>'Consultar', 'url'=>array('/programa/index')),
+										)
+                                ),
+                             //   array('label'=>'Historico', 'url'=>array('/materia/lista_materia')),           
+                             //   array('label'=>'Historico', 'url'=>array('/materia/lista_materia')),           
                                 /*array('label'=>'Departamento', 'url'=>array('/departamento/index'),
                                         'items'=>array(
                                         array('label'=>'Biología', 'url'=>array('/departamento/biologia')),
@@ -49,8 +59,8 @@
                                         
                                         ),
                                     ),*/
-                                array('label'=>'Reporte pensum', 'url'=>array('/departamento/pensum')),  
-                                array('label'=>'Mantenimineto', 'url'=>array('/departamento/index'),
+                             //   array('label'=>'Reporte pensum', 'url'=>array('/departamento/pensum')),  
+                             /*   array('label'=>'Mantenimineto', 'url'=>array('/departamento/index'),
                                         'items'=>array(
                                         array('label'=>'Departamentos', 'url'=>array('/departamento/index')),
                                         array('label'=>'Materias', 'url'=>array('/materia/index')),
@@ -67,7 +77,9 @@
 											
                                         ),),    
                                         ),
-                                    ),         
+                                    ),*/
+                                array('label'=>'Agenda', 'url'=>array('/agenda/index'),'visible'=>!Yii::app()->user->isGuest),
+                                array('label'=>'Actas', 'url'=>array('/acta/index'),'visible'=>!Yii::app()->user->isGuest),
 								array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 								array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
@@ -113,9 +125,9 @@
   
     
     <?php if(Yii::app()->controller->action->id=='index'){ 
-		echo ' <div class="art-layout-cell layout-item-0" style="width: 40%;">';
-        echo ' <p><img alt="" width="217" height="145" src="/gc/themes/tgr/images/shutterstock_46799410.jpg" style="float: left;" /></p>';
-        echo '</div>';
+		//echo ' <div class="art-layout-cell layout-item-0" style="width: 40%;">';
+        //echo ' <p><img alt="" width="217" height="145" src="/gc/themes/tgr/images/shutterstock_46799410.jpg" style="float: left;" /></p>';
+        //echo '</div>';
 		}
 			?>
        
@@ -200,52 +212,6 @@
                     <div class="art-box-body art-vmenublockcontent-body">
 
 
-
-<?php 			
-		$model = new LoginForm();
-?>
-               
-<div class="form">
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'login-form',
-	'enableClientValidation'=>true,
-	'clientOptions'=>array(
-		'validateOnSubmit'=>true,
-	),
-)); ?>
-
-	<p class="note">Los campos con <span class="required">*</span> son obligatorios.</p>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
-		<?php echo $form->textField($model,'username'); ?>
-		<?php echo $form->error($model,'username'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password'); ?>
-		<?php echo $form->error($model,'password'); ?>
-		
-	</div>
-
-	<div class="row rememberMe">
-		<?php echo $form->checkBox($model,'rememberMe'); ?>
-		<?php echo $form->label($model,'rememberMe'); ?>
-		<?php echo $form->error($model,'rememberMe'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Login'); ?>
-	</div>
-
-<?php $this->endWidget(); ?>
-</div><!-- form -->
-
-                
-                
-                
-               	
                     </div>
                 </div>
 	<div class="cleared"></div>
@@ -261,23 +227,46 @@ echo '<div class="art-box art-vmenublock">
     <div class="art-box-body art-vmenublock-body">
                 <div class="art-box art-vmenublockcontent">
                     <div class="art-box-body art-vmenublockcontent-body">
-                <ul class="art-vmenu">
-	<li>
-		<a href="./main.html" class="active">Main</a>
-	</li>		
-</ul>
+                
                 
                		<div class="cleared"></div>
                     </div>
                 </div>
 		<div class="cleared"></div>
-    </div>';
+    </div>';   
+    
+    
+    
+    
+    
+    
+echo '<div class="art-box art-vmenublock">
+    <div class="art-box-body art-vmenublock-body">
+                <div class="art-box art-vmenublockcontent">
+                    <div class="art-box-body art-vmenublockcontent-body">
+       
+       
+       ';
+		$this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Operaciones',
+		));
+		$this->widget('zii.widgets.CMenu', array(
+			'items'=>$this->menu,
+			'htmlOptions'=>array('class'=>'art-vmenu'),
+		));
+		$this->endWidget();
+
+	echo '
+	        		
+                    </div>
+                </div>
+    </div> </div>';
+    
+    
+    
     
     
 }
-
-
-
 ?>
       
 </div>
