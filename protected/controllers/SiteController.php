@@ -414,4 +414,36 @@ class SiteController extends Controller
 						
 	    }
 	    
+	    
+	/**
+	* @param string id
+	* @return string 
+	* @soap
+	*/
+	    public function getMaterias_programa($uname){
+			
+			
+			error_log('como llego en el ser: '.$uname);
+			
+			$evaluacion = Yii::app()->db->createCommand(" SELECT nombre_mat , m.id_materia , p.file ".
+						"FROM materia m ".
+						"INNER JOIN departamento d on d.id_departamento = m.id_departamento  ".
+						"INNER JOIN programa p on p.id_materia = m.id_materia  ".
+						"WHERE d.id_departamento = '".$uname."'")->queryAll();
+
+
+error_log('pase la consultaaaaaa');
+			if(count($evaluacion)>0){
+				error_log('entre al if');
+					foreach($evaluacion as $it){
+						$res_js[] = array("nombre_mat"=>$it['nombre_mat'],"id_materia"=>$it['id_materia'] ,"file"=>$it['file']); 
+					}
+					
+					return json_encode($res_js);
+			}else{
+			error_log('nooooooooooooooooo');
+			 return null;
+				}	
+	    }
+	    
 }

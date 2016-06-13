@@ -57,7 +57,7 @@ return array(
 		'cliente'=>array(
              'class'=>'application.components.MiCliente',
              /*'ws_url'=>'http://elservidor.com/aplicacion/index.php?r=site/ws',*/
-             'ws_url'=>'http://127.0.0.1/gc/index.php/site/ws',
+             'ws_url'=>'http://127.0.0.1/gestioncurricular/index.php/site/ws',
        ),
 		
 		

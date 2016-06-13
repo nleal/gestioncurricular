@@ -1,0 +1,9 @@
+/*$res_js=json_decode($res_js);
+						
+					foreach( $res_js as $it){
+								
+							$div .= '<tr><td>-'.$it->nombre_mat.'';
+							$div .= '</td>';
+							$div .= '<td>ver';
+														
+					}*/

@@ -44,7 +44,7 @@
                                 array('label'=>'Programa', 'url'=>array(''),'visible'=>!Yii::app()->user->isGuest,
 										'items'=>array(
 										array('label'=>'Cargar', 'url'=>array('/programa/create')),
-                                        array('label'=>'Consultar', 'url'=>array('/programa/index')),
+                                        array('label'=>'Consultar', 'url'=>array('/programa/listadepartamento')),
 										)
                                 ),
                              //   array('label'=>'Historico', 'url'=>array('/materia/lista_materia')),           

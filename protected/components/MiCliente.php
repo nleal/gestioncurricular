@@ -15,7 +15,7 @@ class MiCliente extends CApplicationComponent
             ini_set ( 'soap.wsdl_cache_enable' , 1);
 			ini_set ( 'soap.wsdl_cache_ttl' , 3600 );
 			error_log('Llene el cliente ');
-            $this->client = new SoapClient('http://127.0.0.1/gc/index.php/site/ws');
+            $this->client = new SoapClient('http://127.0.0.1/gestioncurricular/index.php/site/ws');
 			error_log('salio el cliente ');
 			
         }else error_log('Cliente no NULL ');
@@ -78,6 +78,10 @@ class MiCliente extends CApplicationComponent
 	public function inactivos_pensum($uname){
 		error_log('Username: '.$uname);
 		return $this->getClienteInt()->getViejos($uname);
+	}
+	public function materias_programa($uname){
+		error_log('Username: '.$uname);
+		return $this->getClienteInt()->getMaterias_programa($uname);
 	}
 	
 	

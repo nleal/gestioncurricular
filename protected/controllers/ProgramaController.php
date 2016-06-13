@@ -28,11 +28,11 @@ class ProgramaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','listadepartamento','mostrar'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','listadepartamento','mostrar'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -185,4 +185,59 @@ class ProgramaController extends Controller
 			Yii::app()->end();
 		}
 	}
+	
+	
+	 public function actionListaDepartamento(){
+			$mode1=Departamento::model()->findAll();
+			$twitter = "@basa90";
+			$this->render("listardepartamento",array("mode1"=>$mode1,"twitter"=>$twitter));	 
+		 }
+		 
+		 
+		 public function actionMostrar(){
+			 error_log('ESTOY EN MOSTRAAAAARRRR');
+			 
+			 
+			 $resultado = $_GET['id_departamento'];
+				$div ='';
+			
+	  
+			$div .= '<table class="normal"><tr> <th>Materia</th><th>Vistas</th>';
+			$div .= '</tr>';	
+				
+				error_log('alertaaaaaaaaaas: '.$resultado);
+				
+				$cli = new MiCliente();
+			
+					$res = $cli->materias_programa($resultado);	
+					
+					error_log('Countmateriaaaaaaaaaaaaaaaaaaa: '.count($res)); 
+							
+					if($res){
+						
+								$res_js=json_decode($res);
+						
+						foreach( $res_js as $it){
+																
+								$div .= '<tr><td>-'.$it->nombre_mat.'';
+								$div .= '</td>';
+							//$div .= '<td>Ver</td></tr>';
+							$div .= '<td><a href='.Yii::app()->request->baseUrl.'/uploads/'.$it->file.'>vere</a></td></tr>';
+							//$div .= '<td><a href="#" title="Ver">'Yii::app()->request->baseUrl."/uploads/".$it->file.'</a></td></tr>';
+						//	$div .= '<td><a href="#" title="'. $data3->definicion_caracteristica.'">'.$data3->nombre_caracteristica.'MONSE'.'</a></td>';
+		
+							
+							
+						}
+							$div .='</table>';
+							
+					}else $div = '**No posee Historico**';
+					
+					
+					
+				
+				$return['message'] = $div;
+				echo json_encode($return);
+		}
+		
 }
