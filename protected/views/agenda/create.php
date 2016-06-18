@@ -8,11 +8,11 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Lista de Agendas', 'url'=>array('index')),
-	array('label'=>'Administrar Agenda', 'url'=>array('admin')),
+	array('label'=>'List Agenda', 'url'=>array('index')),
+	array('label'=>'Manage Agenda', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Crear Agenda</h1>
+<h1>Create Agenda</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -8,15 +8,15 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Lista de Agendas', 'url'=>array('index')),
-	array('label'=>'Crear Agenda', 'url'=>array('create')),
-	array('label'=>'Actualizar Agenda', 'url'=>array('update', 'id'=>$model->id_agenda)),
-	array('label'=>'Eliminar Agenda', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_agenda),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Administrar Agenda', 'url'=>array('admin')),
+	array('label'=>'List Agenda', 'url'=>array('index')),
+	array('label'=>'Create Agenda', 'url'=>array('create')),
+	array('label'=>'Update Agenda', 'url'=>array('update', 'id'=>$model->id_agenda)),
+	array('label'=>'Delete Agenda', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_agenda),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Manage Agenda', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Ver Agenda #<?php echo $model->id_agenda; ?></h1>
+<h1>View Agenda #<?php echo $model->id_agenda; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
@@ -31,5 +31,6 @@ $this->menu=array(
 		'temario',
 		'id_usuario',
 		'id_acta',
+		'file',
 	),
 )); ?>

@@ -84,5 +84,10 @@ class MiCliente extends CApplicationComponent
 		return $this->getClienteInt()->getMaterias_programa($uname);
 	}
 	
+	public function agendas(){
+		error_log('Username: ');
+		return $this->getClienteInt()->getListaAgendas();
+	}
+	
 	
 } 

@@ -7,8 +7,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Crear Agenda', 'url'=>array('create')),
-	array('label'=>'Administrar Agenda', 'url'=>array('admin')),
+	array('label'=>'Create Agenda', 'url'=>array('create')),
+	array('label'=>'Manage Agenda', 'url'=>array('admin')),
 );
 ?>
 

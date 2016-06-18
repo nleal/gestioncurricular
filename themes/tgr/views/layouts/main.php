@@ -78,7 +78,12 @@
                                         ),),    
                                         ),
                                     ),*/
-                                array('label'=>'Agenda', 'url'=>array('/agenda/index'),'visible'=>!Yii::app()->user->isGuest),
+                                array('label'=>'Agenda', 'url'=>array('/agenda/index'),'visible'=>!Yii::app()->user->isGuest ,
+										'items'=>array(
+										array('label'=>'Cargar', 'url'=>array('/agenda/create')),
+                                        array('label'=>'Consultar', 'url'=>array('/agenda/listaagenda')),
+										)
+                                ),
                                 array('label'=>'Actas', 'url'=>array('/acta/index'),'visible'=>!Yii::app()->user->isGuest),
 								array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 								array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)

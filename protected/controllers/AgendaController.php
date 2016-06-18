@@ -28,19 +28,16 @@ class AgendaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				//'users'=>array('*'),
-				'roles'=>array('admin'),
+				'actions'=>array('index','view','listaagenda'),
+				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
-				//'users'=>array('*'),
-				'roles'=>array('admin'),
+				'users'=>array('*'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				//'users'=>array('*'),
-				'roles'=>array('admin'),
+				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -73,8 +70,19 @@ class AgendaController extends Controller
 		if(isset($_POST['Agenda']))
 		{
 			$model->attributes=$_POST['Agenda'];
-			if($model->save())
+			$tempSave=CUploadedFile::getInstance($model, 'file');
+			
+			$id=rand(10,99);
+			
+		
+			$model->file = $tempSave.'_'.$id.'.pdf';
+			
+			
+			if($model->save()){
+			$tempSave->saveAs(Yii::app()->basePath.'/../uploads/' . $tempSave.'_'.$id.'.pdf');
+			
 				$this->redirect(array('view','id'=>$model->id_agenda));
+			}
 		}
 
 		$this->render('create',array(
@@ -173,4 +181,26 @@ class AgendaController extends Controller
 			Yii::app()->end();
 		}
 	}
+	
+	
+	public function actionListaAgenda(){
+			$mode1=Agenda::model()->findAll();
+			$twitter = "@basa90";
+			$this->render("listar",array("mode1"=>$mode1,"twitter"=>$twitter));	 
+		 }
+	
+	 public function actionListar(){
+			$twitter = "0";
+				$cli = new MiCliente();
+			
+			//Servicio de consulta materias 
+				$res_js = $cli->agendas();
+				error_log('Countmateria: '.count($res_js)); 
+				
+				if($res_js){
+						$res_js=json_decode($res_js);
+				$this->render("listar",array("res_js"=>$res_js,"twitter"=>$twitter));	 
+				}
+				
+		 }
 }

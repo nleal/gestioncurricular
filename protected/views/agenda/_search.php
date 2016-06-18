@@ -61,8 +61,13 @@
 		<?php echo $form->textField($model,'id_acta'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model,'file'); ?>
+		<?php echo $form->textField($model,'file',array('size'=>60,'maxlength'=>255)); ?>
+	</div>
+
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Buscar'); ?>
+		<?php echo CHtml::submitButton('Search'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

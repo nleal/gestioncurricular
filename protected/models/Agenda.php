@@ -14,6 +14,7 @@
  * @property string $temario
  * @property integer $id_usuario
  * @property integer $id_acta
+ * @property string $file
  */
 class Agenda extends CActiveRecord
 {
@@ -33,15 +34,16 @@ class Agenda extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('lugar, fecha, fecha_cierre, status, temario, id_usuario, id_acta', 'required'),
+			array('lugar, fecha, fecha_cierre, status, temario, id_usuario, file', 'required'),
 			array('id_usuario, id_acta', 'numerical', 'integerOnly'=>true),
 			array('lugar', 'length', 'max'=>50),
 			array('status', 'length', 'max'=>2),
 			array('temario', 'length', 'max'=>200),
+			array('file', 'length', 'max'=>255),
 			array('hora, fecha_creacion', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_agenda, lugar, fecha, hora, fecha_creacion, fecha_cierre, status, temario, id_usuario, id_acta', 'safe', 'on'=>'search'),
+			array('id_agenda, lugar, fecha, hora, fecha_creacion, fecha_cierre, status, temario, id_usuario, id_acta, file', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -72,6 +74,7 @@ class Agenda extends CActiveRecord
 			'temario' => 'Temario',
 			'id_usuario' => 'Id Usuario',
 			'id_acta' => 'Id Acta',
+			'file' => 'File',
 		);
 	}
 
@@ -103,6 +106,7 @@ class Agenda extends CActiveRecord
 		$criteria->compare('temario',$this->temario,true);
 		$criteria->compare('id_usuario',$this->id_usuario);
 		$criteria->compare('id_acta',$this->id_acta);
+		$criteria->compare('file',$this->file,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

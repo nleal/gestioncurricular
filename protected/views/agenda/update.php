@@ -9,13 +9,13 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Lista de Agendas', 'url'=>array('index')),
-	array('label'=>'Crear Agenda', 'url'=>array('create')),
-	array('label'=>'Ver Agenda', 'url'=>array('view', 'id'=>$model->id_agenda)),
-	array('label'=>'Administrar Agenda', 'url'=>array('admin')),
+	array('label'=>'List Agenda', 'url'=>array('index')),
+	array('label'=>'Create Agenda', 'url'=>array('create')),
+	array('label'=>'View Agenda', 'url'=>array('view', 'id'=>$model->id_agenda)),
+	array('label'=>'Manage Agenda', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Actualizar Agenda <?php echo $model->id_agenda; ?></h1>
+<h1>Update Agenda <?php echo $model->id_agenda; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -431,8 +431,6 @@ class SiteController extends Controller
 						"INNER JOIN programa p on p.id_materia = m.id_materia  ".
 						"WHERE d.id_departamento = '".$uname."'")->queryAll();
 
-
-error_log('pase la consultaaaaaa');
 			if(count($evaluacion)>0){
 				error_log('entre al if');
 					foreach($evaluacion as $it){
@@ -446,4 +444,32 @@ error_log('pase la consultaaaaaa');
 				}	
 	    }
 	    
+	    
+	    
+	    
+	/**
+	* @param 
+	* @return string 
+	* @soap
+	*/
+	    public function getListaAgendas(){
+			
+			
+			error_log('como llego en el ser: ');
+			
+			$evaluacion = Yii::app()->db->createCommand(" SELECT id_agenda,fecha_cierre , file ".
+						"FROM agenda a  ")->queryAll();
+
+			if(count($evaluacion)>0){
+				error_log('entre al if');
+					foreach($evaluacion as $it){
+						$res_js[] = array("id_agenda"=>$it['id_agenda'],"fecha_cierre"=>$it['fecha_cierre'] ,"file"=>$it['file']); 
+					}
+					
+					return json_encode($res_js);
+			}else{
+			error_log('nooooooooooooooooo');
+			 return null;
+				}	
+	    }
 }
