@@ -27,7 +27,7 @@ class ActaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','upload'),
+				'actions'=>array('index','view','upload','listaactas'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -200,4 +200,11 @@ class ActaController extends Controller
 			Yii::app()->end();
 		}
 	}
+	
+	
+	public function actionListaActas(){
+			$mode1=Acta::model()->findAll();
+			$twitter = "@basa90";
+			$this->render("listar",array("mode1"=>$mode1,"twitter"=>$twitter));	 
+		 }
 }

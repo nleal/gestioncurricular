@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create Acta</h1>
+<h1>Cargar Acta</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

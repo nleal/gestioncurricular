@@ -13,6 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create Pensumhistorico</h1>
+<h1>Cargar  Pensum</h1>
+<p class="note">En este modulo podra cargar un pensum a cualquier departamento , señalando si es el actual o alguno historico.</p>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

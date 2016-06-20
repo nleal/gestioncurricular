@@ -16,7 +16,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Los campos con  <span class="required">*</span> son obligatorios</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -51,8 +51,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'status'); ?>
-		<?php echo $form->textField($model,'status',array('size'=>2,'maxlength'=>2)); ?>
+		<?php echo $form->labelEx($model,'Estatus'); ?>
+			<?php echo $form->dropDownList($model, 'status', CHtml::listData( Status::model()->findAll(), 'id_status', 'nombre')); ?>
 		<?php echo $form->error($model,'status'); ?>
 	</div>
 
@@ -63,9 +63,11 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'id_usuario'); ?>
-		<?php echo $form->textField($model,'id_usuario'); ?>
-		<?php echo $form->error($model,'id_usuario'); ?>
+		<?php //echo $form->labelEx($model,'id_usuario'); ?>
+		<?php //echo $form->textField($model,'id_usuario',array('value'=>Yii::app()->user->id,'type'=>'hidden')); ?>
+		<?php echo '<input type="hidden" name="id_usuario" value="'.Yii::app()->user->id.'">'; ?>
+		<?php //echo $form->error($model,'id_usuario'); ?>
+		<?php ?>
 	</div>
 
 	<div class="row">
@@ -75,7 +77,7 @@
     $infoFieldFile = (end($form->attributes)); ?>
 	</div>
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Guardar' : 'Save'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

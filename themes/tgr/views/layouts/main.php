@@ -32,7 +32,10 @@
 <div class="art-bar art-nav">
 <div class="art-nav-outer">
 	
-		<?php $this->widget('zii.widgets.CMenu',array(
+		<?php 
+		
+		
+		$this->widget('zii.widgets.CMenu',array(
 		'id'=>'art-hmenu',	
                 'items'=>array(
                                 array('label'=>'Inicio', 'url'=>array('/site/index')),
@@ -84,7 +87,11 @@
                                         array('label'=>'Consultar', 'url'=>array('/agenda/listaagenda')),
 										)
                                 ),
-                                array('label'=>'Actas', 'url'=>array('/acta/index'),'visible'=>!Yii::app()->user->isGuest),
+                                array('label'=>'Actas', 'url'=>array('/acta/index'),'visible'=>!Yii::app()->user->isGuest,
+										'items'=>array(
+										array('label'=>'Cargar', 'url'=>array('/acta/create')),
+                                        array('label'=>'Consultar', 'url'=>array('/acta/listaactas')),
+										)),
 								array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 								array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),

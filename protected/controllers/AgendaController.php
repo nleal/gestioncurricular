@@ -76,7 +76,7 @@ class AgendaController extends Controller
 			
 		
 			$model->file = $tempSave.'_'.$id.'.pdf';
-			
+			$model->id_usuario = $_REQUEST['id_usuario'];
 			
 			if($model->save()){
 			$tempSave->saveAs(Yii::app()->basePath.'/../uploads/' . $tempSave.'_'.$id.'.pdf');

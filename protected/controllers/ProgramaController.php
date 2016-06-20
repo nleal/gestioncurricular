@@ -76,12 +76,14 @@ class ProgramaController extends Controller
 			
 			$model->file = $tempSave.'_'.$id.'.pdf';
 			
-			foreach ($_REQUEST['CB'] as $checkboxes => $CB){
+			//foreach ($_REQUEST['1'] as $checkboxes => $CB){
 				
 			//$model->file = 'id_materia'=>$CB;
 			 
+			//}
 			
-			}
+				$model->id_materia = $_REQUEST['materia_selec'];
+			
 			
 			
 			if($model->save())
@@ -202,7 +204,7 @@ class ProgramaController extends Controller
 				$div ='';
 			
 	  
-			$div .= '<table class="normal"><tr> <th>Materia</th><th>Vistas</th>';
+			$div .= '<table class="normal"><tr> <th>Materia</th><th> Descargar </th>';
 			$div .= '</tr>';	
 				
 				error_log('alertaaaaaaaaaas: '.$resultado);
@@ -222,7 +224,7 @@ class ProgramaController extends Controller
 								$div .= '<tr><td>-'.$it->nombre_mat.'';
 								$div .= '</td>';
 							//$div .= '<td>Ver</td></tr>';
-							$div .= '<td><a href='.Yii::app()->request->baseUrl.'/uploads/'.$it->file.'>vere</a></td></tr>';
+							$div .= '<td><a href='.Yii::app()->request->baseUrl.'/uploads/'.$it->file.'><img  width=20px height=20px src=/gc/themes/tgr/images/pdf.gif /></a></td></tr>';
 							//$div .= '<td><a href="#" title="Ver">'Yii::app()->request->baseUrl."/uploads/".$it->file.'</a></td></tr>';
 						//	$div .= '<td><a href="#" title="'. $data3->definicion_caracteristica.'">'.$data3->nombre_caracteristica.'MONSE'.'</a></td>';
 		

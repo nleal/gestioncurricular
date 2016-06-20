@@ -18,7 +18,7 @@ class SiteTest extends WebTestCase
 		$this->type('name=ContactForm[email]','tester@example.com');
 		$this->type('name=ContactForm[subject]','test subject');
 		$this->click("//input[@value='Submit']");
-		$this->waitForTextPresent('Body cannot be blank.');
+		$this->waitForTextPresent('Body no puede ser blanco.');
 	}
 
 	public function testLoginLogout()

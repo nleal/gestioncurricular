@@ -16,28 +16,47 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Los campos con  <span class="required">*</span> son obligatorios</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'id_departamento'); ?>
+		<?php echo $form->labelEx($model,'Departamento'); ?>
 		<?php echo $form->dropDownList($model, 'id_departamento', CHtml::listData( Departamento::model()->findAll(), 'id_departamento', 'nombre')); ?>
 		<?php echo $form->error($model,'id_departamento'); ?>
 	</div>
 
+
 	<div class="row">
-		<?php echo $form->labelEx($model,'status'); ?>
+		<?php echo $form->labelEx($model,'Fecha'); ?>
+			<?php	$this->widget('zii.widgets.jui.CJuiDatePicker',
+					array(
+						'model'=>$model,
+						'attribute'=>'fecha',
+						'language'=>'es',
+						'options'=>array(
+								'dateFormat'=>'yy-mm-dd',
+								'constrainInput'=>'false',
+								'duration'=>'fast',
+								'showAnim'=>'show',
+								'minDate'=>date("Y-m-d"),
+						),
+	
+					)
+				);
+		?>
+		<?php echo $form->error($model,'fecha'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'Estatus'); ?>
 		<?php echo $form->dropDownList($model, 'status', CHtml::listData( Status::model()->findAll(), 'id_status', 'nombre')); ?>
 		<?php echo $form->error($model,'status'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'fecha'); ?>
-		<?php echo $form->textField($model,'fecha'); ?>
-		<?php echo $form->error($model,'fecha'); ?>
-	</div>
 
+	<div class="row">
+	</div>
 	<div class="row">
 		<?php echo $form->labelEx($model,'Archivo'); ?>
     <?php echo $form->fileField($model,'file'); ?>
@@ -46,7 +65,7 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Guardar' : 'Save'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

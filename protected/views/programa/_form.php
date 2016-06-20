@@ -16,22 +16,37 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+<p class="note">Los campos con  <span class="required">*</span> son obligatorios</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'status'); ?>
-		<?php echo $form->dropDownList($model, 'status', CHtml::listData( Status::model()->findAll(), 'id_status', 'nombre')); ?>
-		<?php echo $form->error($model,'status'); ?>
-	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'fecha'); ?>
-		<?php echo $form->textField($model,'fecha'); ?>
+		<?php	$this->widget('zii.widgets.jui.CJuiDatePicker',
+					array(
+						'model'=>$model,
+						'attribute'=>'fecha',
+						'language'=>'es',
+						'options'=>array(
+								'dateFormat'=>'yy-mm-dd',
+								'constrainInput'=>'false',
+								'duration'=>'fast',
+								'showAnim'=>'show',
+								'minDate'=>date("Y-m-d"),
+						),
+	
+					)
+				);
+		?>
 		<?php echo $form->error($model,'fecha'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'Estatus'); ?>
+		<?php echo $form->dropDownList($model, 'status', CHtml::listData( Status::model()->findAll(), 'id_status', 'nombre')); ?>
+		<?php echo $form->error($model,'status'); ?>
+	</div>
 
 
 <?php $model_deps=Departamento::model()->findAll(); 
@@ -69,7 +84,9 @@ foreach($model_mats as $model_mat){
 			}
 			
 		if($num_td<4){
-			echo '<td><input type="checkbox" name="CB[]'.$model_mat->id_materia.'" value="'.$model_mat->id_materia.'">'.$model_mat->nombre_mat.'</input></td>';
+			//echo '<td><input type="radio" id="'.$model_dep->id_departamento.'" name="CB[]'.$model_mat->id_materia.'" value="'.$model_mat->id_materia.'">'.$model_mat->nombre_mat.'</input></td>';
+			echo '<td><input type="radio"  name="materia_selec" value="'.$model_mat->id_materia.'">'.$model_mat->nombre_mat.'</input></td>';
+			
 			$num_td++;
 		}else{
 			$num_td=0;
@@ -97,7 +114,7 @@ foreach($model_mats as $model_mat){
 
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Guardar' : 'Save'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

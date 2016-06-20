@@ -16,7 +16,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Los campos con  <span class="required">*</span> son obligatorios</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -27,7 +27,7 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'id_agenda'); ?>
+		<?php echo $form->labelEx($model,'Numero de Agenda'); ?>
 		<?php echo $form->textField($model,'id_agenda'); ?>
 		<?php echo $form->error($model,'id_agenda'); ?>
 	</div>
@@ -46,7 +46,22 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'fecha'); ?>
-		<?php echo $form->textField($model,'fecha'); ?>
+		<?php	$this->widget('zii.widgets.jui.CJuiDatePicker',
+					array(
+						'model'=>$model,
+						'attribute'=>'fecha',
+						'language'=>'es',
+						'options'=>array(
+								'dateFormat'=>'yy-mm-dd',
+								'constrainInput'=>'false',
+								'duration'=>'fast',
+								'showAnim'=>'show',
+								'minDate'=>date("Y-m-d"),
+						),
+	
+					)
+				);
+		?>
 		<?php echo $form->error($model,'fecha'); ?>
 	</div>
 
@@ -99,7 +114,7 @@ foreach($model_mats as $model_mat){
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Guardar' : 'Save'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
