@@ -1,6 +1,128 @@
 
-- guardar un solo chek box en el modelo 
 - que los pdf tengan bien la extencion 
 - como colocar el usuario que esta creando algo en el id_user en una tabla 
 - como quirtar los bordes blancos 
+
+
+
+
+
+Buenas noches profesoras, espero se encuentren bien.
+
+El presente correo es para recapitular lo previsto en la reunión de esta mañana.
+
+Trataré de ser lo más explícito posible con respecto a los puntos tratados. Les debo reiterar que cualquier acotación o punto que se me haya olvidado plasmar me lo recuerden y que me hagan la corrección pertinente si algún punto lo entendí de manera errónea.
+
+Comenzaré primero como lo hicimos en el encuentro de esta mañana.
+
+
+LOGIN
+
+	- Eliminar la frase “Campo con * son obligatorio” de la interfaz de login. A demás de la línea que dice Entrar y la otra linea que dice Introduzca sus datos.
+
+	- Colocar la opción ¿Olvido su contraseña?.
+
+PENSUM
+
+	- En el menú PENSUM agregar la opción de sub-menú ADMINISTRAR PENSUM.
+
+	- Eliminar las opercaciones que estan a la derecha que dicen LISTAR HISTORICO PENSUM y ADMINISTRAR PENSUM.
+
+	- En el sub-menú cargar pensum en el campo ESTATUS cambiar las opciones de la lista desplegable por vigente/histórico para representar que el pensum que se va a cargar en ese momento tendrá un estatus vigente que corresponderá al actual ó histórico para clasificar ese pensum que vamos a cargar en el histórico de pensum.
+
+	- Validar que sólo haya un pensum vigente.
+
+	- Liberar el calendario para que permita seleccionar fechas anteriores a la actual, que es lo que hasta los momentos permite.
+
+	- En el sub-menú de consultar pensum que se visualice una lista desplegable con los departamentos para que luego muestre los pensum del departamento seleccionado ya que actualmente no consulta sino que los muestra todos los pensum cargados y la idea es que consulte y no que muestre.
+
+	- Luego de que se visualicen los pensum seleccionados, en la tabla que se muestra se va a cambiar la columna que dice DEPARTAMENTO por una que me muestre los años de cada pensum visualizado.  
+
+	Ej: 	Departamento	Actual		Histórico 		
+		computación		descargar	visualizar
+		biología		descargar	visualizar
+		química		descargar	visualizar
+						
+									lo cambio por
+seleccionar departamento: Computación
+
+		Año			Actual		Histórico
+		2000			descargar	visualizar
+		2004			descargar	visualizar
+		2010			descargar	visualizar
+
+	
+	- En consultar historico de pensum cambiar titulo ESCUELA por HISTORICO.
+
+
+PROGRAMA
+
+	- Según lo antes dicho por ustedes y por los conocimientos adquiridos (corrijanme si me aquivoco) una matería está ligada a un único programa, puesto que la materia va cambiando su código según va cambiando su programa e inclusive solo el titulo, asi pues según el siguiente ejemplo:
+
+Ej 	CA0101      Elemento Discreto I  			Vigente
+	CC0178      Elementos Discretos (1-2002)	Inactivo
+	CM0178     Matemática Discreta (1-1994)	Inactivo
+
+	Cada una de las materias está asociada a un único programa y “CA0101  Elemento Discreto I” es “Familia” de  CCO178 y CM0178 pues son sus predesesores. 
+
+	En otro ejemplo tengo una materia que no cambio de nombre pero si de contenido programático interno, por lo tanto cambio de codigo y es otra materia nueva, sin embargo están relacionadas como lo que llame “Familia”.
+
+CA0317 Arquitectura del Computador (1-1996)   Inactivo
+     CA0279 Arquitectura del Computador (1-1998)   Inactivo      
+         CAO301 Diseño Digital y Organización del Computador Vigente
+	
+Quisiera saber si estoy en lo cierto o hay otros aspectos que hacen que la materias cambien su código a parte del contenido programático.
+
+Otra cosa que acotar es que desconozco la fecha del último programa actual para cada asignatura, sólo poseo la fecha en la que entró en vigencia más no en la que dejó de estar vigente. Es necesario conocer esa fecha porque si quisiera consultar el programa de Elemento Discreto en el año 2005 no sabría si mostrar el actual o mostrar el programa de Elementos Discretos puesto que solo me dice que entro en vigencia en el año 2002 más no me dice si su vigencia fue hasta el año 2004, 2005 o 2009. No me queda claro cuando comienza en vigencia el pensum actual debido a que es el único que no tiene esa fecha. (creo que de toda la reunión este es el punto que menos claro me quedo y se que es uno de los más importantes) 
+
+	- Crear un filtro para los departamentos. Que no se vea un cuadro con las materias sino una lista con todas las materias de ese departamento.
+
+	-  En el menú PROGRAMA agregar la opción de sub-menú ADMINISTRAR ASIGNATURA que al posicionarse sobre esa opción se despliegue una sub-lista con el filtrado por departamento.
+
+	- Volver a situar la opción de crear asignatura para porder cargar materias con nombres de materias antiguas para que queden disponibles en el listado de materias cuando vaya a cargar un programa antiguo para esa asignatura.
+
+	- Mostrar la opción si la asignatura a la cual se le va a cargar el programa es obligatoria o electiva.
+
+	- En el sub-menú cargar programa en el campo ESTATUS cambiar las opciones de la lista desplegable por vigente/histórico para representar que el programa que se va a cargar en ese momento tendrá un estatus vigente que corresponderá al actual ó histórico para clasificar ese programa que vamos a cargar en el histórico de programas.
+
+
+AGENDA
+
+ 	- En el sub-menú cargar agenda en el campo ESTATUS cambiar las opciones de la lista desplegable por abierta/cerrada para indicar que la agenda que posee estatus cerrada ya no podrá ser modificada. Por el contrario las agendas que aun tengan el estatus abierta se podrán modificar
+
+	- Cambiar la palabra del campo TEMARIO por PUNTOS A TRATAR al cargar la agenda.
+
+	- En ese mismo campo dividirlo en 3 campos para escribir el contenido de 3 o más puntos a tratar. Y al final colocar un boton con el símbolo más (+) que significa que se puede agregar uno o más puntos a parte de los 3 establecidos.
+
+Ej 		punto 1___________
+		punto 2___________
+		punto 3___________ (+)
+
+	- Cambiar la opción de cargar archivo pues se esta creando un pdf mas no se está cargando. Lo correcto sería GENERAR_PDF.
+
+	- En la opción CONSULTAR AGENDA cambiar el título ESCUELA por HISTORICO DE AGENDAS.
+
+
+ACTAS
+
+	- Colocar más atributos a la tabla de cunsultar actas para saber con certeza cual acta vamos a visualizar.
+
+
+
+
+
+
+
+
+Cabe destacar que si hay algunos puntos a los cuales no hice mención les pido por favor me lo hagan saber porque todos los puntos son importantes.
+
+Una última petición es la de recordarles nuevamente me faciliten por favor la ley de interoperabilidad y los reglamentos de la Dirección de Docencia y Desarrollo Curricular, porque siento un poco de inseguridad en ese aspecto pues no conozco a fondo estos reglamentos.
+
+
+Gracias nuevamente por la receptividad. 
+
+Esperando su pronta respuesta me despido..
+
+
+Saludos
 

@@ -22,7 +22,7 @@ $this->breadcrumbs=array(
 	),
 )); ?>
 
-	<p class="note">Los campos con <span class="required">*</span> son obligatorios.</p>
+	
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'Usuario'); ?>
@@ -46,6 +46,8 @@ $this->breadcrumbs=array(
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Login'); ?>
 	</div>
+
+
 
 <?php $this->endWidget(); ?>
 </div><!-- form -->

@@ -10772,3 +10772,174 @@ REQUEST_URI=/gestioncurricular/index.php/agenda/create
 in /var/www/html/gestioncurricular/themes/tgr/views/layouts/main.php (37)
 in /var/www/html/gestioncurricular/themes/tgr/views/layouts/column2.php (22)
 in /var/www/html/gestioncurricular/protected/controllers/AgendaController.php (90)
+2016/06/27 12:18:25 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /var/www/html/yii/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/html/yii/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /var/www/html/yii/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/html/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/html/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/html/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/html/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('admin')
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('programa/admin')
+#9 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/html/gestioncurricular/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/gestioncurricular/index.php/programa/admin
+HTTP_REFERER=http://localhost/gestioncurricular/index.php/programa/create
+---
+2016/06/27 12:32:57 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /var/www/html/yii/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/html/yii/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /var/www/html/yii/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/html/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/html/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/html/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/html/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('admin')
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('agenda/admin')
+#9 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/html/gestioncurricular/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/gestioncurricular/index.php/agenda/admin
+HTTP_REFERER=http://localhost/gestioncurricular/index.php/agenda/create
+---
+2016/07/03 13:43:03 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /var/www/html/yii/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/html/yii/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /var/www/html/yii/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/html/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/html/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/html/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/html/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('admin')
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('agenda/admin')
+#9 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/html/gestioncurricular/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/gestioncurricular/index.php/agenda/admin
+HTTP_REFERER=http://localhost/gestioncurricular/index.php/agenda/create
+---
+2016/07/03 14:42:53 [error] [exception.CException] exception 'CException' with message 'Agenda has an invalid validation rule. The rule must specify attributes to be validated and the validator name.' in /var/www/html/yii/framework/base/CModel.php:289
+Stack trace:
+#0 /var/www/html/yii/framework/base/CModel.php(260): CModel->createValidators()
+#1 /var/www/html/yii/framework/base/CModel.php(547): CModel->getValidators()
+#2 /var/www/html/yii/framework/web/widgets/CActiveForm.php(564): CModel->getSafeAttributeNames()
+#3 /var/www/html/gestioncurricular/protected/views/agenda/_form.php(50): CActiveForm->errorSummary(Object(Agenda))
+#4 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/g...')
+#5 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/g...', Array, true)
+#6 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/g...', Array, true)
+#7 /var/www/html/gestioncurricular/protected/views/agenda/create.php(18): CController->renderPartial('_form', Array)
+#8 /var/www/html/yii/framework/web/CBaseController.php(126): require('/var/www/html/g...')
+#9 /var/www/html/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/g...', Array, true)
+#10 /var/www/html/yii/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/g...', Array, true)
+#11 /var/www/html/yii/framework/web/CController.php(782): CController->renderPartial('create', Array, true)
+#12 /var/www/html/gestioncurricular/protected/controllers/AgendaController.php(95): CController->render('create', Array)
+#13 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): AgendaController->actionCreate()
+#14 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /var/www/html/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#16 /var/www/html/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#17 /var/www/html/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#18 /var/www/html/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#19 /var/www/html/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#20 /var/www/html/yii/framework/web/CController.php(291): CFilterChain->run()
+#21 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('create')
+#23 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('agenda/create')
+#24 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#25 /var/www/html/gestioncurricular/index.php(13): CApplication->run()
+#26 {main}
+REQUEST_URI=/gestioncurricular/index.php/agenda/create
+---
+2016/07/03 14:50:13 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /var/www/html/yii/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/html/yii/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /var/www/html/yii/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/html/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/html/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/html/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/html/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('admin')
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('agenda/admin')
+#9 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/html/gestioncurricular/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/gestioncurricular/index.php/agenda/admin
+HTTP_REFERER=http://localhost/gestioncurricular/index.php/agenda/index
+---
+2016/07/03 15:02:27 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id_agenda' in 'field list'. The SQL statement executed was: INSERT INTO `puntos_agenda` (`id_agenda`, `punto`) VALUES (:id_agenda, :punto).
+in /var/www/html/gestioncurricular/protected/controllers/AgendaController.php (87)
+in /var/www/html/gestioncurricular/index.php (13)
+2016/07/03 15:02:27 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id_agenda' in 'field list'. The SQL statement executed was: INSERT INTO `puntos_agenda` (`id_agenda`, `punto`) VALUES (:id_agenda, :punto)' in /var/www/html/yii/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/html/yii/framework/db/CDbCommand.php(1250): CDbCommand->execute(Array)
+#1 /var/www/html/gestioncurricular/protected/controllers/AgendaController.php(87): CDbCommand->insert('puntos_agenda', Array)
+#2 /var/www/html/yii/framework/web/actions/CInlineAction.php(49): AgendaController->actionCreate()
+#3 /var/www/html/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/html/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /var/www/html/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/html/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /var/www/html/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/html/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/html/yii/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/html/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/html/yii/framework/web/CWebApplication.php(282): CController->run('create')
+#12 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('agenda/create')
+#13 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/html/gestioncurricular/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/gestioncurricular/index.php/agenda/create
+HTTP_REFERER=http://localhost/gestioncurricular/index.php/agenda/create
+---
+2016/07/03 15:15:18 [error] [php] Undefined index: numero_punto (/var/www/html/gestioncurricular/protected/controllers/AgendaController.php:87)
+Stack trace:
+#0 /var/www/html/yii/framework/web/filters/CFilterChain.php(133): AgendaController->runAction()
+#1 /var/www/html/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/html/yii/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/html/yii/framework/web/filters/CInlineFilter.php(58): AgendaController->filterAccessControl()
+#4 /var/www/html/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/html/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/html/yii/framework/web/CController.php(265): AgendaController->runActionWithFilters()
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): AgendaController->run()
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/html/gestioncurricular/index.php(13): CWebApplication->run()
+REQUEST_URI=/gestioncurricular/index.php/agenda/create
+in /var/www/html/gestioncurricular/protected/controllers/AgendaController.php (87)
+in /var/www/html/gestioncurricular/index.php (13)
+2016/07/03 15:16:02 [error] [php] Undefined index: numero_punto (/var/www/html/gestioncurricular/protected/controllers/AgendaController.php:87)
+Stack trace:
+#0 /var/www/html/yii/framework/web/filters/CFilterChain.php(133): AgendaController->runAction()
+#1 /var/www/html/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/html/yii/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/html/yii/framework/web/filters/CInlineFilter.php(58): AgendaController->filterAccessControl()
+#4 /var/www/html/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/html/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/html/yii/framework/web/CController.php(265): AgendaController->runActionWithFilters()
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): AgendaController->run()
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/html/gestioncurricular/index.php(13): CWebApplication->run()
+REQUEST_URI=/gestioncurricular/index.php/agenda/create
+in /var/www/html/gestioncurricular/protected/controllers/AgendaController.php (87)
+in /var/www/html/gestioncurricular/index.php (13)
+2016/07/03 15:16:07 [error] [php] Undefined index: numero_punto (/var/www/html/gestioncurricular/protected/controllers/AgendaController.php:87)
+Stack trace:
+#0 /var/www/html/yii/framework/web/filters/CFilterChain.php(133): AgendaController->runAction()
+#1 /var/www/html/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/html/yii/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/html/yii/framework/web/filters/CInlineFilter.php(58): AgendaController->filterAccessControl()
+#4 /var/www/html/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/html/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/html/yii/framework/web/CController.php(265): AgendaController->runActionWithFilters()
+#7 /var/www/html/yii/framework/web/CWebApplication.php(282): AgendaController->run()
+#8 /var/www/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/html/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/html/gestioncurricular/index.php(13): CWebApplication->run()
+REQUEST_URI=/gestioncurricular/index.php/agenda/create
+in /var/www/html/gestioncurricular/protected/controllers/AgendaController.php (87)
+in /var/www/html/gestioncurricular/index.php (13)

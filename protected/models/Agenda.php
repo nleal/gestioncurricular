@@ -34,7 +34,7 @@ class Agenda extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('lugar, fecha, fecha_cierre, status, temario, id_usuario, file', 'required'),
+			array('lugar, fecha, fecha_cierre, status, id_usuario', 'required'),
 			array('id_usuario, id_acta', 'numerical', 'integerOnly'=>true),
 			array('lugar', 'length', 'max'=>50),
 			array('status', 'length', 'max'=>2),

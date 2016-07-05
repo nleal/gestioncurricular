@@ -70,17 +70,24 @@ class AgendaController extends Controller
 		if(isset($_POST['Agenda']))
 		{
 			$model->attributes=$_POST['Agenda'];
-			$tempSave=CUploadedFile::getInstance($model, 'file');
+			//$tempSave=CUploadedFile::getInstance($model, 'file');
 			
-			$id=rand(10,99);
+			//$id=rand(10,99);
 			
 		
-			$model->file = $tempSave.'_'.$id.'.pdf';
+			//$model->file = $tempSave.'_'.$id.'.pdf';
 			$model->id_usuario = $_REQUEST['id_usuario'];
 			
-			if($model->save()){
-			$tempSave->saveAs(Yii::app()->basePath.'/../uploads/' . $tempSave.'_'.$id.'.pdf');
 			
+			//$model->temario = $_REQUEST['punto_a1']; 
+			
+			if($model->save()){
+			//$tempSave->saveAs(Yii::app()->basePath.'/../uploads/' . $tempSave.'_'.$id.'.pdf');
+			
+			for($i=1;$i<=$_REQUEST['numero_punto'] ;$i++){
+				$sql = Yii::app()->db->createCommand()->insert('puntos_agenda',array('id_agenta'=>$model->id_agenda,'punto'=>$_REQUEST['punto_a'.$i]));	
+			}	
+							
 				$this->redirect(array('view','id'=>$model->id_agenda));
 			}
 		}

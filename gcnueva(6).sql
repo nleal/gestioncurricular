@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 12-06-2016 a las 14:59:35
+-- Tiempo de generación: 05-07-2016 a las 12:11:47
 -- Versión del servidor: 5.5.44-0ubuntu0.14.04.1
 -- Versión de PHP: 5.5.9-1ubuntu4.13
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `acta` (
   `fecha` date NOT NULL,
   `file` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
   PRIMARY KEY (`id_acta`)
-) ENGINE=InnoDB  DEFAULT CHARSET=armscii8 AUTO_INCREMENT=42 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=armscii8 AUTO_INCREMENT=43 ;
 
 --
 -- Volcado de datos para la tabla `acta`
@@ -48,7 +48,8 @@ INSERT INTO `acta` (`id_acta`, `reunion`, `id_agenda`, `lugar`, `hora`, `fecha`,
 (18, 'N° 04-2012', 1, 'Salón de Reuniones del Consejo de la Facultad', '0000-00-00 00:00:00', '2014-04-04', ''),
 (39, '1', 1, 'brayan', '0000-00-00 00:00:00', '2014-04-04', 'transferencia.pdf_84.pdf'),
 (40, '1', 1, 'brayan', '0000-00-00 00:00:00', '2014-04-04', 'transferencia.pdf_84.pdf'),
-(41, '1', 1, 'brayan', '0000-00-00 00:00:00', '2014-04-04', 'formato_de_consignacion_de_recaudos.pdf_23.pdf');
+(41, '1', 1, 'brayan', '0000-00-00 00:00:00', '2014-04-04', 'formato_de_consignacion_de_recaudos.pdf_23.pdf'),
+(42, 'N° 01-2012', 5, 'Salón de Reuniones del Consejo de la Facultad', '0000-00-00 00:00:00', '0000-00-00', 'ArticuloTDD.pdf_57.pdf');
 
 -- --------------------------------------------------------
 
@@ -66,38 +67,42 @@ CREATE TABLE IF NOT EXISTS `agenda` (
   `status` varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `temario` varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `id_usuario` int(30) NOT NULL,
-  `id_acta` int(30) NOT NULL,
+  `id_acta` int(30) DEFAULT NULL,
+  `file` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id_agenda`)
-) ENGINE=InnoDB  DEFAULT CHARSET=armscii8 AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=armscii8 AUTO_INCREMENT=38 ;
 
 --
 -- Volcado de datos para la tabla `agenda`
 --
 
-INSERT INTO `agenda` (`id_agenda`, `lugar`, `fecha`, `hora`, `fecha_creacion`, `fecha_cierre`, `status`, `temario`, `id_usuario`, `id_acta`) VALUES
-(1, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2015-02-27', '10:00:00', '2015-02-21 10:00:00', '2015-02-27 16:00:00', 'S', 'Actualizar los Planes de Estudios FACYT', 1, 1),
-(2, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2015-02-27', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Actualizar pensum de computación', 1, 1),
-(3, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2015-03-11', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Actualizar los pensum de biologia', 1, 2),
-(4, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-02-27', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Actualizar pensum de fisica', 1, 3),
-(5, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-03-27', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Actualizar pensum de matemática', 1, 4),
-(6, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-04-27', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Actualizar pensum de química', 1, 5),
-(7, 'Salon de Reuniones del Consejo de la Facultad-Deca', '0000-00-00', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Entrega de oficios de cada departamento', 1, 6),
-(8, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-01-15', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Revision de pensum de biologia', 1, 7),
-(9, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-02-15', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Revision de pensum de biologia', 1, 8),
-(10, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-03-15', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Revision de pensum de computacion', 1, 9),
-(11, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2015-04-11', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Revision de pensum de fisica', 1, 10),
-(12, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2015-01-11', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Revision de pensum de matemati', 1, 11),
-(13, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2015-02-11', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Revision de pensum de quimica', 1, 12),
-(14, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-04-15', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Actualizar horarios de departamento de computacion', 1, 13),
-(15, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-01-08', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Actualizar horarios de departamento de biologia', 1, 14),
-(16, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2015-02-08', '10:00:00', '2015-02-21 10:00:00', '2015-02-27 16:00:00', 'S', 'Actualizar horarios de departamento de fisica', 1, 15),
-(17, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-02-08', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Actualizar horarios de departamento de matematica', 1, 16),
-(18, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-03-08', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Actualizar horarios de departamento de quimica', 1, 17),
-(19, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-01-10', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Modificacion de horarios de lab de biologia', 1, 18),
-(20, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-02-10', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Modificacion de horarios de lab de computacion', 1, 19),
-(21, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-03-10', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Modificacion de horarios de lab de fisica', 1, 20),
-(22, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-04-10', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Modificacion de horarios de lab de matematica', 1, 21),
-(23, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-05-10', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Modificacion de horarios de lab de quimica', 1, 22);
+INSERT INTO `agenda` (`id_agenda`, `lugar`, `fecha`, `hora`, `fecha_creacion`, `fecha_cierre`, `status`, `temario`, `id_usuario`, `id_acta`, `file`) VALUES
+(1, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2015-02-27', '10:00:00', '2015-02-21 10:00:00', '2015-02-27 16:00:00', 'S', 'Actualizar los Planes de Estudios FACYT', 1, 1, ''),
+(2, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2015-02-27', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Actualizar pensum de computación', 1, 1, ''),
+(3, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2015-03-11', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Actualizar los pensum de biologia', 1, 2, ''),
+(4, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-02-27', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Actualizar pensum de fisica', 1, 3, ''),
+(5, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-03-27', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Actualizar pensum de matemática', 1, 4, ''),
+(6, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-04-27', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Actualizar pensum de química', 1, 5, ''),
+(7, 'Salon de Reuniones del Consejo de la Facultad-Deca', '0000-00-00', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Entrega de oficios de cada departamento', 1, 6, ''),
+(8, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-01-15', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Revision de pensum de biologia', 1, 7, ''),
+(9, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-02-15', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Revision de pensum de biologia', 1, 8, ''),
+(10, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-03-15', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Revision de pensum de computacion', 1, 9, ''),
+(11, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2015-04-11', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Revision de pensum de fisica', 1, 10, ''),
+(12, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2015-01-11', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Revision de pensum de matemati', 1, 11, ''),
+(13, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2015-02-11', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Revision de pensum de quimica', 1, 12, ''),
+(14, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-04-15', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Actualizar horarios de departamento de computacion', 1, 13, ''),
+(15, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-01-08', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Actualizar horarios de departamento de biologia', 1, 14, ''),
+(16, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2015-02-08', '10:00:00', '2015-02-21 10:00:00', '2015-02-27 16:00:00', 'S', 'Actualizar horarios de departamento de fisica', 1, 15, ''),
+(17, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-02-08', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Actualizar horarios de departamento de matematica', 1, 16, ''),
+(18, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-03-08', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Actualizar horarios de departamento de quimica', 1, 17, ''),
+(19, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-01-10', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Modificacion de horarios de lab de biologia', 1, 18, ''),
+(20, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-02-10', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Modificacion de horarios de lab de computacion', 1, 19, ''),
+(21, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-03-10', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Modificacion de horarios de lab de fisica', 1, 20, ''),
+(22, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-04-10', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Modificacion de horarios de lab de matematica', 1, 21, ''),
+(23, 'Salon de Reuniones del Consejo de la Facultad-Deca', '2016-05-10', '10:00:00', '2015-02-21 10:00:00', '2015-04-07 16:00:00', 'S', 'Modificacion de horarios de lab de quimica', 1, 22, ''),
+(35, 'manongo', '2016-02-08', '10:00:00', '2016-01-10 00:00:00', '2016-01-10 00:00:00', '1', '', 1, NULL, NULL),
+(36, 'manongo', '2016-02-08', '10:00:00', '2016-01-10 00:00:00', '2016-01-10 00:00:00', '1', '', 1, NULL, NULL),
+(37, 'manongo', '2016-02-10', '10:00:00', '2016-01-10 00:00:00', '2016-01-10 00:00:00', '1', '', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -548,7 +553,17 @@ CREATE TABLE IF NOT EXISTS `programa` (
   `file` varchar(500) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `id_materia` int(10) NOT NULL,
   PRIMARY KEY (`id_programa`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=7 ;
+
+--
+-- Volcado de datos para la tabla `programa`
+--
+
+INSERT INTO `programa` (`id_programa`, `status`, `fecha`, `file`, `id_materia`) VALUES
+(1, 1, '2016-06-01', 'transferencia.pdf_84.pdf', 56),
+(2, 1, '2016-06-01', 'transferencia.pdf_84.pdf', 2),
+(5, 1, '2016-06-19', 'ArticuloTDD.pdf_18.pdf', 5),
+(6, 1, '2016-06-27', 'disenoAgilConTdd_ebook.pdf_65.pdf', 40);
 
 -- --------------------------------------------------------
 
@@ -595,6 +610,27 @@ INSERT INTO `punto` (`id_punto`, `descripcion`, `status`, `id_usuario`, `id_agen
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `puntos_agenda`
+--
+
+CREATE TABLE IF NOT EXISTS `puntos_agenda` (
+  `id_punto` int(3) NOT NULL AUTO_INCREMENT,
+  `id_agenta` int(3) NOT NULL,
+  `punto` varchar(500) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id_punto`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `puntos_agenda`
+--
+
+INSERT INTO `puntos_agenda` (`id_punto`, `id_agenta`, `punto`) VALUES
+(4, 37, 'Revision de pensum de COMP'),
+(5, 37, 'Revision de pensum de biologia');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `resolucion`
 --
 
@@ -605,7 +641,7 @@ CREATE TABLE IF NOT EXISTS `resolucion` (
   `resolucion` varchar(500) COLLATE utf8_spanish_ci DEFAULT NULL,
   `id_materia` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_resolucion`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=29 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=30 ;
 
 --
 -- Volcado de datos para la tabla `resolucion`
@@ -639,7 +675,8 @@ INSERT INTO `resolucion` (`id_resolucion`, `id_acta`, `id_punto`, `resolucion`, 
 (25, 41, NULL, NULL, 10),
 (26, 41, NULL, NULL, 14),
 (27, 41, NULL, NULL, 84),
-(28, 41, NULL, NULL, 89);
+(28, 41, NULL, NULL, 89),
+(29, 42, NULL, NULL, 42);
 
 -- --------------------------------------------------------
 
@@ -663,17 +700,15 @@ CREATE TABLE IF NOT EXISTS `status` (
   `id_status` int(10) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id_status`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `status`
 --
 
 INSERT INTO `status` (`id_status`, `nombre`) VALUES
-(1, 'activo'),
-(2, 'inactivo'),
-(3, 'proceso'),
-(4, 'finalizado');
+(1, 'Vigente'),
+(2, 'Historico');
 
 -- --------------------------------------------------------
 
