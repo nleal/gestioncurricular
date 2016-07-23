@@ -16,7 +16,7 @@ $this->breadcrumbs=array(
 
 
 <h1>Departamentos</h1>
-
+<hr>
 
     <table><tr> <th>Departamentos</th><th>Actual</th><th>Historico</th>
     

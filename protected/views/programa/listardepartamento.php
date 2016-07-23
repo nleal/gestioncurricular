@@ -45,7 +45,7 @@ $this->breadcrumbs=array(
 
 <h1>Programas por Departamento</h1>
 
-
+<hr>
 
 <center>
 

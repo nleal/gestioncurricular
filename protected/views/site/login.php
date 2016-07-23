@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 ?>
 <div style="text-align:center">
 <h1>Entrar</h1>
-
+<hr>
 <p>Por favor introduzca sus datos:</p>
 
 <div class="form">

@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 
 
 <h1>Escuelas</h1>
-
+<hr>
 <table border='0'>
     <table border="0"><tr><th>Reunion</th> <th>Agenda</th><th>Fecha </th><th>Exportar</th>
     

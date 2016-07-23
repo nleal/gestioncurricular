@@ -14,5 +14,5 @@ $this->menu=array(
 ?>
 
 <h1>Cargar Acta</h1>
-
+<hr>
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>
