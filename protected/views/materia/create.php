@@ -3,8 +3,8 @@
 /* @var $model Materia */
 
 $this->breadcrumbs=array(
-	'Materias'=>array('index'),
-	'Create',
+	'Asignaturas'=>array('index'),
+	'Nueva',
 );
 
 $this->menu=array(
@@ -13,6 +13,22 @@ $this->menu=array(
 );
 ?>
 
-<h1>Crear Materia</h1>
+<h1>Nueva Asignatura</h1>
+<hr>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>
+
+
+<?php
+
+
+		
+
+    foreach(Yii::app()->user->getFlashes() as $key => $message) {
+		
+		echo '<script>alert("'.$message.'") </script>';
+		
+		
+        //echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
+    }
+?>

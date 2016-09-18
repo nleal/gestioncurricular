@@ -125,7 +125,23 @@ class SiteController extends Controller
 	*/
 	    public function getObtenerMensajeRemoto($argX)
 	    {
-	        return "HOLA REMOTO, TU MENSAJE ES: ".$argX;
+	        error_log('entre a validacion ');
+            $x = ' ';
+            
+            $evaluacion = Yii::app()->db->createCommand(" SELECT * ".
+                        "FROM pensumhistorico a ".
+                        "WHERE  status = 1 and id_departamento = ".$argX."")->queryAll();
+
+            if(count($evaluacion)>0){
+                error_log('si hay vigente ');
+                
+                    $x = 'false';
+                    return $x;
+            }else{
+                    error_log('no existe ninguno  vigente');
+                    $x= 'true';
+                    return $x;
+                }  
 	    }
 	    
 	/**
@@ -374,7 +390,7 @@ class SiteController extends Controller
 	*/    
 	    public function getInactivos($uname){
 			
-			$evaluacion = Yii::app()->db->createCommand("SELECT a.id_departamento , b.nombre, a.file ".
+			$evaluacion = Yii::app()->db->createCommand("SELECT a.id_departamento , b.nombre, a.file , a.fecha ".
 														"FROM pensumhistorico as a ".
 														"inner join departamento as b on a.id_departamento = b.id_departamento ".
 														"WHERE a.status='2' and b.id_departameto = '".$uname."' ")->queryAll();
@@ -382,7 +398,7 @@ class SiteController extends Controller
 
 			if(count($evaluacion)>0){
 					foreach($evaluacion as $it){
-						$res_js[] = array("id_departamento"=>$it['id_departamento'],"nombre"=>$it['nombre'],"file"=>$it['file']); 
+						$res_js[] = array("id_departamento"=>$it['id_departamento'],"nombre"=>$it['nombre'],"file"=>$it['file'],"fecha"=>$it['fecha']); 
 					}
 					
 					return json_encode($res_js);
@@ -398,7 +414,7 @@ class SiteController extends Controller
 	*/    
 	    public function getViejos($uname){
 			
-			$evaluacion = Yii::app()->db->createCommand("SELECT a.id_departamento , b.nombre, a.file ".
+			$evaluacion = Yii::app()->db->createCommand("SELECT a.id_departamento , b.nombre, a.file , a.fecha ".
 														"FROM pensumhistorico as a ".
 														"inner join departamento as b on a.id_departamento = b.id_departamento ".
 														"WHERE a.status='2' and b.id_departamento = '".$uname."' ")->queryAll();
@@ -406,7 +422,7 @@ class SiteController extends Controller
 
 			if(count($evaluacion)>0){
 					foreach($evaluacion as $it){
-						$res_js[] = array("id_departamento"=>$it['id_departamento'],"nombre"=>$it['nombre'],"file"=>$it['file']); 
+						$res_js[] = array("id_departamento"=>$it['id_departamento'],"nombre"=>$it['nombre'],"file"=>$it['file'], "fecha"=>$it['fecha']); 
 					}
 					
 					return json_encode($res_js);
@@ -423,18 +439,18 @@ class SiteController extends Controller
 	    public function getMaterias_programa($uname){
 			
 			
-			error_log('como llego en el ser: '.$uname);
+			error_log('como llego en el ser:progra '.$uname);
 			
-			$evaluacion = Yii::app()->db->createCommand(" SELECT nombre_mat , m.id_materia , p.file ".
+			$evaluacion = Yii::app()->db->createCommand(" SELECT nombre_mat , m.id_materia , p.file , m.cod_materia, d.nombre ".
 						"FROM materia m ".
 						"INNER JOIN departamento d on d.id_departamento = m.id_departamento  ".
 						"INNER JOIN programa p on p.id_materia = m.id_materia  ".
-						"WHERE d.id_departamento = '".$uname."'")->queryAll();
+						"WHERE d.id_departamento = '".$uname."'order by nombre_mat")->queryAll();
 
 			if(count($evaluacion)>0){
 				error_log('entre al if');
 					foreach($evaluacion as $it){
-						$res_js[] = array("nombre_mat"=>$it['nombre_mat'],"id_materia"=>$it['id_materia'] ,"file"=>$it['file']); 
+						$res_js[] = array("nombre_mat"=>$it['nombre_mat'],"id_materia"=>$it['id_materia'] ,"file"=>$it['file'],"cod_materia"=>$it['cod_materia'],"nombre"=>$it['nombre']); 
 					}
 					
 					return json_encode($res_js);
@@ -470,6 +486,72 @@ class SiteController extends Controller
 			}else{
 			error_log('nooooooooooooooooo');
 			 return null;
+				}	
+	    }
+	    
+	    	    /**
+	* @param string id
+	* @return string 
+	* @soap
+	*/    
+	    public function getPadresMateria($id){
+			
+			error_log('Llegue al servicio de relacion materia');
+									
+									
+									
+			
+			/*$uname = Yii::app()->db->createCommand("SELECT id_materia_hija , id_materia_padre  ".
+														"FROM relacion_materia  ".
+														"inner join materia  on id_materia = id_materia_hija ".
+														"WHERE cod_materia= '".$id."'");
+														
+			*/														
+														
+			$evaluacion = Yii::app()->db->createCommand("SELECT id_materia_hija , id_materia_padre  ".
+														"FROM relacion_materia  ".
+														"inner join materia  on id_materia = id_materia_hija ".
+														"WHERE cod_materia= '".$id."'")->queryAll();
+
+
+			if(count($evaluacion)>0){
+				error_log('si hay');
+					foreach($evaluacion as $it){
+						$res_js[] = array("id_materia_hija"=>$it['id_materia_hija'],"id_materia_padre"=>$it['id_materia_padre']); 
+					}
+					
+					return json_encode($res_js);
+			}else{
+				error_log('nada');
+				return null;
+			}	
+	    }  
+
+
+		
+	/**
+	* @param string argX
+	* @return string 
+	* @soap
+	*/
+	    public function getProgramavigente($argX)
+	    {
+	        error_log('entre a validacion progrma  ');
+			$x = ' ';
+			
+			$evaluacion = Yii::app()->db->createCommand(" SELECT * ".
+						"FROM programa a ".
+						"WHERE  status = 1 and id_materia = ".$argX."")->queryAll();
+
+			if(count($evaluacion)>0){
+				error_log('si hay vigente ');
+				
+					$x = 'false';
+					return $x;
+			}else{
+					error_log('no existe ninguno  vigente');
+					$x= 'true';
+					return $x;
 				}	
 	    }
 }

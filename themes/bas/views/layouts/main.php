@@ -4,8 +4,9 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="language" content="en" />
+<meta name="language" content="es" />
 <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
 <meta name="author" content="http://bootstraptaste.com" />
@@ -16,6 +17,9 @@
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/flexslider.css" rel="stylesheet" />
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/style.css" rel="stylesheet" />
 
+    <!-- Owl Carousel Assets -->
+<link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/owl-carousel/owl.carousel.css" rel="stylesheet">
+<link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/owl-carousel/owl.theme.css" rel="stylesheet">
 
 <!-- Theme skin -->
 <link href="<?php echo Yii::app()->theme->baseUrl; ?>/skins/default.css" rel="stylesheet" />
@@ -27,9 +31,13 @@
 
 </head>
 
-
-
 <body>
+<?php 
+Yii::app()->clientScript->registerCoreScript('jquery');     
+Yii::app()->clientScript->registerCoreScript('jquery.ui'); 
+Yii::app()->clientScript->registerCoreScript('bbq'); 
+
+?>
 <header>
         <div class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -51,6 +59,27 @@
 		'id'=>'art-hmenu',	
                 'items'=>array(
                                 array('label'=>'Inicio', 'url'=>array('/site/index')),
+                                array('label'=>'Asignatura ▼',
+										'linkOptions'=> array(
+										'class' => 'dropdown-toggle',
+										'data-toggle' => 'dropdown',),
+										'itemOptions' => array('class'=>'dropdown')
+									,'url'=>array(''),'visible'=>!Yii::app()->user->isGuest,
+                                'items'=>array(
+										array('label'=>'Cargar', 'url'=>array('/materia/create')),
+                                        array('label'=>'Administrar', 'url'=>array('/materia/admin')),
+                                        array('label'=>'Consulta', 'url'=>array('/materia/historico')),
+										),'class'=>'dropdown' ),                                
+								array('label'=>'Usuarios ▼',
+										'linkOptions'=> array(
+										'class' => 'dropdown-toggle',
+										'data-toggle' => 'dropdown',),
+										'itemOptions' => array('class'=>'dropdown')
+									,'url'=>array(''),'visible'=>!Yii::app()->user->isGuest,
+                                'items'=>array(
+										array('label'=>'Cargar', 'url'=>array('/usuario/create')),
+                                        array('label'=>'Administrar', 'url'=>array('/usuario/admin')),
+										),'class'=>'dropdown' ),
                                 array('label'=>'Pensum ▼',
 										'linkOptions'=> array(
 										'class' => 'dropdown-toggle',
@@ -60,6 +89,7 @@
                                 'items'=>array(
 										array('label'=>'Cargar', 'url'=>array('/pensumhistorico/create')),
                                         array('label'=>'Consultar', 'url'=>array('/pensumhistorico/listar')),
+                                        array('label'=>'Administrar', 'url'=>array('/pensumhistorico/admin')),
 										),'class'=>'dropdown' ),
                                 array('label'=>'Programa ▼', 
 										'linkOptions'=> array(
@@ -70,6 +100,9 @@
 										'items'=>array(
 										array('label'=>'Cargar', 'url'=>array('/programa/create')),
                                         array('label'=>'Consultar', 'url'=>array('/programa/listadepartamento')),
+                                        array('label'=>'Administar ', 'url'=>array('/programa/admin')),
+                                        array('label'=>'Administrar Materia', 'url'=>array('/materia/admin')),
+                                        array('label'=>'Agregar Materia', 'url'=>array('/materia/create')),
 										)
                                 ),
                                 array('label'=>'Agenda ▼', 
@@ -81,6 +114,7 @@
 										'items'=>array(
 										array('label'=>'Cargar', 'url'=>array('/agenda/create')),
                                         array('label'=>'Consultar', 'url'=>array('/agenda/listaagenda')),
+                                        array('label'=>'Administrar', 'url'=>array('/agenda/admin')),
 										)
                                 ),
                                 array('label'=>'Actas ▼', 
@@ -91,6 +125,7 @@
 									,'url'=>array('/acta/index'),'visible'=>!Yii::app()->user->isGuest,
 										'items'=>array(
 										array('label'=>'Cargar', 'url'=>array('/acta/create')),
+										array('label'=>'Administrar', 'url'=>array('/acta/admin')),
                                         array('label'=>'Consultar', 'url'=>array('/acta/listaactas')),
 										)),
 								array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
@@ -123,7 +158,8 @@
 	</div>
 	</section>
 
-	<?php if(Yii::app()->controller->action->id=='index'){ ?>
+	<?php 
+	if(Yii::app()->controller->id=='site' && Yii::app()->controller->action->id=='index'){ ?>
 	<section id="featured">
 	<!-- start slider -->
 	<div class="container">
@@ -182,7 +218,9 @@
 	</div>
 	</section>
 	
-	 <?php if(Yii::app()->controller->action->id=='index'){ ?>
+	 <?php //if(Yii::app()->controller->action->id=='index'){ ?>
+		 
+	<?php	 if(Yii::app()->controller->id=='site' && Yii::app()->controller->action->id=='index'){ ?>
 	<section id="content">
 	<div class="container">
 		<div class="row">
@@ -270,9 +308,30 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<h4 class="heading">Enlaces de Interés:</h4>
-				<div class="row">
+			
 					
-				</div>
+					
+					
+
+    <div id="owl-demo" >
+              
+      <div class="item"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/img/assets/correouc.png" alt="Owl Image"></div>
+      <div class="item"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/img/assets/cultura.png" alt="Owl Image"></div>
+      <div class="item"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/img/assets/dch.png" alt="Owl Image"></div>
+      <div class="item"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/img/assets/entornovirtual.png" alt="Owl Image"></div>
+      <div class="item"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/img/assets/faraute.png" alt="Owl Image"></div>
+      <div class="item"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/img/assets/intranet.png" alt="Owl Image"></div>
+      <div class="item"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/img/assets/pasantias.png" alt="Owl Image"></div>
+      <div class="item"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/img/assets/sice.png" alt="Owl Image"></div>
+     
+    </div>
+
+
+					
+					
+					
+					
+				
 			</div>
 		</div>
 
@@ -354,7 +413,29 @@
 <!-- javascript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.js"></script>
+ <style>
+    #owl-demo .item{
+        margin: 3px;
+    }
+    #owl-demo .item img{
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+    </style>
+ 
+<script type="text/javascript">
+    $(document).ready(function(){
+      $("#owl-demo").owlCarousel({
+        autoPlay: 3000,
+        items : 4,
+        itemsDesktop : [1199,3],
+        itemsDesktopSmall : [979,3]
+      });
+    });
+</script>
+<script src="<?php echo Yii::app()->theme->baseUrl; ?>/owl-carousel/owl.carousel.js"></script>
+
 <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.easing.1.3.js"></script>
 <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/bootstrap.min.js"></script>
 <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.fancybox.pack.js"></script>
@@ -365,5 +446,11 @@
 <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.flexslider.js"></script>
 <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/animate.js"></script>
 <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/custom.js"></script>
+
+
+
+
+
+
 </body>
 </html>

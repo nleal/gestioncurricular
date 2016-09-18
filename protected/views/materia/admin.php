@@ -26,12 +26,9 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Administrar Materias</h1>
+<h1>Administrar Asignaturas</h1>
+<hr>
 
-<p>
-Puedes usar los siguientes operadores opcionalmente (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) al principio de cada uno de los valores de búsqueda para especificar la forma en la comparación debe hacerse.
-</p>
 
 <?php echo CHtml::link('Búsqueda Avanzada','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">

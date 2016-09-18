@@ -56,33 +56,92 @@
 		<?php echo $form->error($model,'lugar'); ?>
 	</div>
 
+
 	<div class="row">
+		<?php echo $form->labelEx($model,'num_agenda'); ?>
+		<?php echo $form->textField($model,'num_agenda',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo $form->error($model,'num_agenda'); ?>
+	</div>
+
+<div class="row">
 		<?php echo $form->labelEx($model,'fecha'); ?>
-		<?php echo $form->textField($model,'fecha'); ?>
+		<?php	$this->widget('zii.widgets.jui.CJuiDatePicker',
+					array(
+						'model'=>$model,
+						'attribute'=>'fecha',
+						'language'=>'es',
+						'options'=>array(
+								'dateFormat'=>'yy-mm-dd',
+								'constrainInput'=>'false',
+								'duration'=>'fast',
+								'showAnim'=>'show',
+								'minDate'=>date("Y-m-d"),
+															
+						),
+	
+					)
+				);
+		?>
 		<?php echo $form->error($model,'fecha'); ?>
 	</div>
+	
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'hora'); ?>
 		<?php echo $form->textField($model,'hora'); ?>
 		<?php echo $form->error($model,'hora'); ?>
 	</div>
-
-	<div class="row">
+	
+<div class="row">
 		<?php echo $form->labelEx($model,'fecha_creacion'); ?>
-		<?php echo $form->textField($model,'fecha_creacion'); ?>
+		<?php	$this->widget('zii.widgets.jui.CJuiDatePicker',
+					array(
+						'model'=>$model,
+						'attribute'=>'fecha_creacion',
+						'language'=>'es',
+						'options'=>array(
+								'dateFormat'=>'yy-mm-dd',
+								'constrainInput'=>'false',
+								'duration'=>'fast',
+								'showAnim'=>'show',
+								'minDate'=>date("Y-m-d"),
+															
+						),
+	
+					)
+				);
+		?>
 		<?php echo $form->error($model,'fecha_creacion'); ?>
 	</div>
-
-	<div class="row">
+	
+	
+	
+<div class="row">
 		<?php echo $form->labelEx($model,'fecha_cierre'); ?>
-		<?php echo $form->textField($model,'fecha_cierre'); ?>
+		<?php	$this->widget('zii.widgets.jui.CJuiDatePicker',
+					array(
+						'model'=>$model,
+						'attribute'=>'fecha_cierre',
+						'language'=>'es',
+						'options'=>array(
+								'dateFormat'=>'yy-mm-dd',
+								'constrainInput'=>'false',
+								'duration'=>'fast',
+								'showAnim'=>'show',
+								'minDate'=>date("Y-m-d"),
+															
+						),
+	
+					)
+				);
+		?>
 		<?php echo $form->error($model,'fecha_cierre'); ?>
 	</div>
 
+
 	<div class="row">
 		<?php echo $form->labelEx($model,'Estatus'); ?>
-			<?php echo $form->dropDownList($model, 'status', CHtml::listData( Status::model()->findAll(), 'id_status', 'nombre')); ?>
+		<?php echo $form->dropDownList($model,'status',array('1'=>'Abierta','2'=>'Cerrada')); ?>
 		<?php echo $form->error($model,'status'); ?>
 	</div>
 
@@ -112,7 +171,7 @@
     <?php //echo $form->error($model, 'file');
     $infoFieldFile = (end($form->attributes)); ?>
 	</div>
-	<div class="row buttons">
+	<div class="row buttons buttonSave">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Guardar' : 'Save'); ?>
 	</div>
 

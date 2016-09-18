@@ -88,6 +88,13 @@ class MiCliente extends CApplicationComponent
 		error_log('Username: ');
 		return $this->getClienteInt()->getListaAgendas();
 	}
+	public function padres_materia($uname){
+		
+		return $this->getClienteInt()->getPadresMateria($uname);
+	}
 	
-	
+	public function programavigente($argX) {
+        return $this->getClienteInt()->getProgramavigente($argX);
+    }
+    
 } 

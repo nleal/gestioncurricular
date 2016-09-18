@@ -4,16 +4,43 @@
 /* @var $form CActiveForm */
 ?>
 
+<script>
+		$(document).ready(function() {
+        $('#submitbutton').click(function(ev) {
+            ev.preventDefault();
+            $.ajax({ 
+			url: <?php echo "'".CController::createUrl('pensumhistorico/cosa')."'"; ?>,               
+			type: "GET",
+			dataType: 'json',
+                success:function(data){
+					   if(data.message==1){			
+						if (confirm("¿El departamento tiene pensum vigente, desea actualizarlo?")) {
+								//$('#pensumhistorico-form').submit();
+								$('#nataly').val(1);
+								//$('#pensumhistorico-form').submit();
+						}
+					   }                
+				},
+                error: function() {
+                    alert("Error!");
+                },
+            });
+            return false;
+        });
+    });
+	</script>
+
+
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'pensumhistorico-form',
 	'enableClientValidation' => true,
 	'clientOptions' => array(
-                            'validateOnSubmit' => true,
-                        ),
+    'validateOnSubmit' => true,         ),
     'htmlOptions' => array('enctype' => 'multipart/form-data'),
 	'enableAjaxValidation'=>false,
+	
 )); ?>
 
 	<p class="note">Los campos con  <span class="required">*</span> son obligatorios</p>
@@ -22,8 +49,9 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'Departamento'); ?>
-		<?php echo $form->dropDownList($model, 'id_departamento', CHtml::listData( Departamento::model()->findAll(), 'id_departamento', 'nombre')); ?>
+		<?php echo $form->dropDownList($model, 'id_departamento', CHtml::listData( Departamento::model()->findAll(), 'id_departamento', 'nombre'),array('empty'=>'Seleccione...', 'id_departamento'=>'id_departamento')); ?>
 		<?php echo $form->error($model,'id_departamento'); ?>
+		
 	</div>
 
 
@@ -40,6 +68,11 @@
 								'duration'=>'fast',
 								'showAnim'=>'show',
 								'minDate'=>date("Y-m-d"),
+								'changeMonth'=>true,
+								'changeYear'=>true,
+								'yearRange'=>'1900:2099',
+								'minDate' => '1900-01-01',      
+								'maxDate' => '2099-12-31',
 						),
 	
 					)
@@ -55,24 +88,35 @@
 	</div>
 
 
+
 	<div class="row">
 	</div>
 	<div class="row">
-		<?php echo $form->labelEx($model,'Archivo'); ?>
+	<?php echo $form->labelEx($model,'Archivo'); ?>
     <?php echo $form->fileField($model,'file'); ?>
     <?php echo $form->error($model, 'file');
     $infoFieldFile = (end($form->attributes)); ?>
 	</div>
+	
+	<div class="row">
+	<input type="hidden" name="nataly" value="0">
+    </div>
+	
+	
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Guardar' : 'Save'); ?>
+	<div class="row buttons buttonSave">
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Guardar' : 'Save',array('id' => 'submitbutton')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
-
-
+<script type="text/javascript">
+    function emptyfields()
+    {
+        console.log("Entre");
+    }
+    </script>
 
 <script>
     function customValidateFile(messages){

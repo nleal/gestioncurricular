@@ -13,7 +13,7 @@ $this->breadcrumbs=array(
 <hr>
 <p>Por favor introduzca sus datos:</p>
 
-<div class="form">
+<div class="loginForm">
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'login-form',
 	'enableClientValidation'=>true,
@@ -43,10 +43,12 @@ $this->breadcrumbs=array(
 		<?php echo $form->error($model,'rememberMe'); ?>
 	</div>
 
-	<div class="row buttons">
+	<div class="row buttons buttonSave">
 		<?php echo CHtml::submitButton('Login'); ?>
+		<br />
+		<a href="forgot_password.php">¿Olvidó su nombre de usuario o contraseña?</a>
 	</div>
-
+					    
 
 
 <?php $this->endWidget(); ?>

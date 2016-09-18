@@ -17,7 +17,7 @@ $this->menu=array(
 ?>
 
 <h1>View Programa #<?php echo $model->id_programa; ?></h1>
-
+<hr>
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
@@ -28,3 +28,13 @@ $this->menu=array(
 		'id_materia',
 	),
 )); ?>
+
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Operaciones',
+		));
+		$this->widget('zii.widgets.CMenu', array(
+			'items'=>$this->menu,
+			'htmlOptions'=>array('class'=>'art-vmenu'),
+		));
+		$this->endWidget();
+		?>

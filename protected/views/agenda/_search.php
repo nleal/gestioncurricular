@@ -16,6 +16,12 @@
 		<?php echo $form->textField($model,'id_agenda'); ?>
 	</div>
 
+
+	<div class="row">
+		<?php echo $form->label($model,'num_agenda'); ?>
+		<?php echo $form->textField($model,'num_agenda'); ?>
+	</div>
+
 	<div class="row">
 		<?php echo $form->label($model,'lugar'); ?>
 		<?php echo $form->textField($model,'lugar',array('size'=>50,'maxlength'=>50)); ?>

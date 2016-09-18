@@ -32,14 +32,14 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'status'); ?> 
-		<?php echo $form->dropDownList($model,'status',array('s'=>'S','n'=>'N')); ?>
+		<?php echo $form->labelEx($model,'status'); ?>
+		<?php echo $form->dropDownList($model, 'status', CHtml::listData( Status::model()->findAll(), 'id_status', 'nombre')); ?>
 		<?php echo $form->error($model,'status'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'id_departamentooo'); ?>
-		<?php echo $form->dropDownList($model, 'id_departamento', CHtml::listData( Departamento::model()->findAll(), 'id_departamento', 'nombre')); ?>
+		<?php echo $form->labelEx($model,'id_departamento'); ?>
+		<?php echo $form->dropDownList($model, 'id_departamento', CHtml::listData( Departamento::model()->findAll(), 'id_departamento', 'nombre'),array('empty'=>'Seleccione...', 'id_departamento'=>'id_departamento')); ?>
    	</div>
 
 	<div class="row">
@@ -48,10 +48,23 @@
 		<?php echo $form->error($model,'cod_materia'); ?>
 	</div>
 
-	<div class="row buttons">
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'Codigo de materia relacionada'); ?>
+		<?php echo $form->textField($model,'cod_materia_padre',array('size'=>10,'maxlength'=>10)); ?>
+		
+	</div>
+
+
+	<div class="row buttons  buttonSave">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+
+
+
+

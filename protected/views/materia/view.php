@@ -16,16 +16,36 @@ $this->menu=array(
 );
 ?>
 
-<h1>Ver Materia <?php echo $model->cod_materia; ?></h1>
-
+<h1>Asignatura : <?php echo $model->cod_materia; ?></h1>
+<hr>
+	  
+	  
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'nombre_mat',
+	
+	/*array(
+	'name'=>'status',
+    'value'=>Status::Model()->FindByPk($data->status)->nombre,
+    ),*/
+    'nombre_mat',
+    'descripcion',
+    array(
+    'name'=>'id_departamento',
+    'type'=>'raw',
+    'value'=>Departamento::Model()->FindByPk($model->id_departamento)->nombre
+    
+     ),
+     'cod_materia'
+		/*'nombre_mat',
 		'descripcion',
-		'status',
 		'id_departamento',
 		'id_materia',
-		'cod_materia',
+		'cod_materia',*/
 	),
 )); ?>
+
+
+<?php echo CHtml::link('Editar Asignatura',Yii::app()->createUrl('materia/update', array('update', 'id'=>$model->id_materia)  )) ;?>
+
+

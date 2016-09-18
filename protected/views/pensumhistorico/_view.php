@@ -5,9 +5,7 @@
 
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id_pensum_hist')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id_pensum_hist), array('view', 'id'=>$data->id_pensum_hist)); ?>
-	<br />
+	
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('id_departamento')); ?>:</b>
 	<?php echo CHtml::encode($data->id_departamento); ?>

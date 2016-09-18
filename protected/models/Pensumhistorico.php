@@ -15,6 +15,7 @@ class Pensumhistorico extends CActiveRecord
 	/**
 	 * @return string the associated database table name
 	 */
+		 
 	public function tableName()
 	{
 		return 'pensumhistorico';
@@ -55,10 +56,10 @@ class Pensumhistorico extends CActiveRecord
 	{
 		return array(
 			'id_pensum_hist' => 'Id Pensum Hist',
-			'id_departamento' => 'Id Departamento',
-			'status' => 'Status',
+			'id_departamento' => 'Departamento',
+			'status' => 'Estatus',
 			'fecha' => 'Fecha',
-			'file' => 'File',
+			'file' => 'Documento',
 		);
 	}
 
@@ -77,6 +78,11 @@ class Pensumhistorico extends CActiveRecord
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$rr = Status::model()->find("nombre='".$this->status."'");
+		$this->status = $rr['id_status'];
+		$rr = Departamento::model()->find("nombre='".$this->id_departamento."'");
+		$this->id_departamento = $rr['id_departamento'];
 
 		$criteria=new CDbCriteria;
 
@@ -101,4 +107,5 @@ class Pensumhistorico extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+	
 }

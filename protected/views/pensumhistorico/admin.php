@@ -3,13 +3,13 @@
 /* @var $model Pensumhistorico */
 
 $this->breadcrumbs=array(
-	'Pensumhistoricos'=>array('index'),
-	'Manage',
+	'Pensum'=>array('index'),
+	'Administrar',
 );
 
 $this->menu=array(
-	array('label'=>'List Pensumhistorico', 'url'=>array('index')),
-	array('label'=>'Create Pensumhistorico', 'url'=>array('create')),
+	array('label'=>'Listar Pensum', 'url'=>array('index')),
+	array('label'=>'Nuevo Pensum', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,14 +26,10 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Pensumhistoricos</h1>
+<h1>Administrar Pensum</h1>
+<hr>
 
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
-
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php echo CHtml::link('Busqueda Avanzada','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -45,13 +41,49 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id_pensum_hist',
-		'id_departamento',
-		'status',
-		'fecha',
-		'file',
+		
+//        'id_pensum_hist',
+//        'nombre_dep',
+//        'status',
+//        'fecha',
+//        'file',
+   
+/*    array(
+        'name'=>'id_pensum_hist',
+    'filter'=>CHtml::activeTextField($model, 'id_pensum_hist'),
+        'value'=>'$data->id_pensum_hist',
+        'header'=>'ID'
+    ),*/
+    array(
+    'name'=>'id_departamento',
+    'filter'=>CHtml::activeTextField($model, 'id_departamento'),
+        'value'=>'Departamento::Model()->FindByPk($data->id_departamento)->nombre',
+        'header'=>'Departamento',
+       
+    ),
+    array(
+		'name'=>'status',
+		'filter'=>CHtml::activeTextField($model, 'status'),
+        'value'=>'Status::Model()->FindByPk($data->status)->nombre',
+        'header'=>'Estatus'
+    ),
+    array(
+
+        'value'=>'$data->fecha',
+        'header'=>'Fecha'
+    ),
+    array(
+
+        'value'=>'$data->file',
+        'header'=>'Archivo'
+    ),
 		array(
 			'class'=>'CButtonColumn',
 		),
 	),
 )); ?>
+
+
+
+
+

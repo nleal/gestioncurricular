@@ -37,7 +37,7 @@ class ProgramaController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'users'=>array('*'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -82,13 +82,29 @@ class ProgramaController extends Controller
 			 
 			//}
 			
+			
+			
 				$model->id_materia = $_REQUEST['materia_selec'];
 			
 			
+			$res='true';
+        $var = $model->id_materia ;
+        $cli = new MiCliente();
+        $res = $cli->programavigente($var);
 			
+			if($res=='true' || $model->status==2){
+				error_log('entro al if del programa'); 
 			if($model->save())
 				$tempSave->saveAs(Yii::app()->basePath.'/../uploads/' . $tempSave.'_'.$id.'.pdf');
 				$this->redirect(array('view','id'=>$model->id_programa));
+				
+			}else{
+			Yii::app()->user->setFlash('error', "Ya existe un Programa vigente para esta materia");
+
+                error_log('Existe uno con viegente ');
+            }	
+				
+				
 		}
 
 		$this->render('create',array(
@@ -204,7 +220,7 @@ class ProgramaController extends Controller
 				$div ='';
 			
 	  
-			$div .= '<table class="normal"><tr> <th>Materia</th><th> Descargar </th>';
+			$div .= '<table class="normal"><tr> <th>Departamento</th><th>Asignatura</th><th>Código</th><th> Descargar </th>';
 			$div .= '</tr>';	
 				
 				error_log('alertaaaaaaaaaas: '.$resultado);
@@ -221,7 +237,11 @@ class ProgramaController extends Controller
 						
 						foreach( $res_js as $it){
 																
-								$div .= '<tr><td>-'.$it->nombre_mat.'';
+								$div .= '<tr><td>-'.$it->nombre.'';
+								$div .= '</td>';
+								$div .= '<td>-'.$it->nombre_mat.'';
+								$div .= '</td>';
+								$div .= '<td>-'.$it->cod_materia.'';
 								$div .= '</td>';
 							//$div .= '<td>Ver</td></tr>';
 							$div .= '<td><a href='.Yii::app()->request->baseUrl.'/uploads/'.$it->file.'><img  width=20px height=20px src=/gc/themes/tgr/images/pdf.gif /></a></td></tr>';
@@ -233,7 +253,7 @@ class ProgramaController extends Controller
 						}
 							$div .='</table>';
 							
-					}else $div = '**No posee Historico**';
+					}else $div = '**No posee Asignaturas**';
 					
 					
 					

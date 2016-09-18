@@ -32,11 +32,11 @@ class MateriaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','lista_materia','lista_actas_materia','reporte_acta'),
+				'actions'=>array('index','view','lista_materia','lista_actas_materia','reporte_acta','historico'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','lista_materia','lista_actas_materia', 'reporte_acta'),
+				'actions'=>array('create','update','lista_materia','lista_actas_materia', 'reporte_acta', 'hisotrico'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -68,20 +68,82 @@ class MateriaController extends Controller
 	{
 		$model=new Materia;
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
 		if(isset($_POST['Materia']))
 		{
+			
 			$model->attributes=$_POST['Materia'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_materia));
-		}
+			$r = Materia::model()->find("cod_materia='".$model->cod_materia."'");
+			
+			if ($model->cod_materia == null)	{  //Si el codigo de la materia es nulo 
+				Yii::app()->user->setFlash('error', "El código de la asignatura es obligatorio  ");
+			}
+			else{
+			
+			 if($r){ // Valida si el codigo ya fue usado por otra materia
+					Yii::app()->user->setFlash('error', "Ya existe una Asignatura con el codigo  ".$model->cod_materia);
+			//		error_log('codigo de materia repetido ');	
+			 }else{			
+					$cod_p = false; // El codigo padre viene vacio 
+			
+					if ($model->cod_materia_padre != null){
+						$cod_p = true;
+						$var = $model->cod_materia_padre;
+						
+						$x = Materia::model()->find("cod_materia='".$model->cod_materia_padre."'");
+				//		error_log('el codigo padre viene con valor');
+						
+						
+					}
+					
+					if(!$x && $cod_p == true){ //Viene un codigo y el codigo no existe 
+							Yii::app()->user->setFlash('error', "El código de la Asignatura a relacionar no existe.");
+			
+						}else if ($cod_p && $x) {
+							
+							if($model->save()){
+					//			error_log('GUARDO LA MATERIA');
+								
+								}  // Si el codigo a relacionar viene nulo debe guardar 
+								error_log('agregar hijos');
+								$cli = new MiCliente();
+								$res = $cli->padres_materia($var);
+						//		error_log('codigo a buscar '.$var);
+								
+								error_log($res);
+								if($res){
+									$res_js=json_decode($res);
+									foreach( $res_js as $itb){
+														
+										$sql = Yii::app()->db->createCommand()->insert('relacion_materia',array('id_materia_hija'=>$model->id_materia,'id_materia_padre'=>$itb->id_materia_padre));			
+										$sql = Yii::app()->db->createCommand()->insert('relacion_materia',array('id_materia_hija'=>$model->id_materia,'id_materia_padre'=>$itb->id_materia_hija));			
+									}
+							//		error_log('SALI del for');
+				
+								}else {
+									
+									$sql = Yii::app()->db->createCommand()->insert('relacion_materia',array('id_materia_hija'=>$model->id_materia,'id_materia_padre'=>$x->id_materia));
+								//	error_log('No trajo informacion');
+								}
+							//error_log('ahora guardar materia');
+							
+									
+									$this->redirect(array('view','id'=>$model->id_materia));
+							} else {
+								
+								
+									if($model->save())  // Si el codigo a relacionar viene nulo debe guardar 
+									$this->redirect(array('view','id'=>$model->id_materia));
+							}
+						
+			}// fin del segundo else. El codigo de la materia ya esta siendo usado 	
+		} // fin del primer else 
+	} //fin del isset
 
 		$this->render('create',array(
 			'model'=>$model,
 		));
-	}
+	} // fin de la funcion 
+
 
 	/**
 	 * Updates a particular model.
@@ -91,15 +153,104 @@ class MateriaController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
+error_log('entre al update......................');	
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Materia']))
 		{
 			$model->attributes=$_POST['Materia'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_materia));
+			/*if($model->save())
+				$this->redirect(array('view','id'=>$model->id_materia));*/
+				
+error_log('pdm......................');					
+				
+					$r = Materia::model()->find("cod_materia='".$model->cod_materia."' and id_materia <> '".$model->id_materia."'");
+					$r1 = Materia::model()->find("cod_materia='".$model->id_materia."'");
+			
+			if ($model->cod_materia == null)	{  //Si el codigo de la materia es nulo 
+				Yii::app()->user->setFlash('error', "El código de la asignatura es obligatorio  ");
+			}
+			else{
+			
+			 if($r ){ // Valida si el codigo ya fue usado por otra materia
+					Yii::app()->user->setFlash('error', "Ya existe una Asignatura con el codigo  ".$r->cod_materia);
+					error_log('codigo de materia repetido ');	
+			 }else{			
+					$cod_p = false; // El codigo padre viene vacio 
+			
+					if ($model->cod_materia_padre != null){
+						$cod_p = true;
+						$var = $model->cod_materia_padre;
+						
+						$x = Materia::model()->find("cod_materia='".$model->cod_materia_padre."'");
+						error_log('el codigo padre viene con valor');
+						
+						
+					}
+					
+					if(!$x && $cod_p == true){ //Viene un codigo y el codigo no existe 
+							Yii::app()->user->setFlash('error', "El código de la Asignatura a relacionar no existe.");
+			
+						}else if ($cod_p && $x) {
+							
+							if($model->save()){
+								error_log('GUARDO LA MATERIA en el update ');
+								
+								}  // Si el codigo a relacionar viene nulo debe guardar 
+								
+								error_log('vamos a eliminar  ' .$x->id_materia);
+							$borrar =  Yii::app()->db->createCommand("DELETE ".
+										"FROM relacion_materia ".
+										"WHERE  id_materia_hija = '".$x->id_materia."' ")->execute();
+								
+								
+
+			if(count($borrar)>0){
+					error_log('borro alguna!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ');
+					
+			}else 
+					error_log('ninguna =( =( =( ');			
+								
+								
+								error_log('agregar hijos');
+								$cli = new MiCliente();
+								$res = $cli->padres_materia($var);
+								error_log('codigo a buscar '.$var);
+								
+								error_log($res);
+								if($res){
+									$res_js=json_decode($res);
+									foreach( $res_js as $itb){
+														
+										$sql = Yii::app()->db->createCommand()->insert('relacion_materia',array('id_materia_hija'=>$model->id_materia,'id_materia_padre'=>$itb->id_materia_padre));			
+										$sql = Yii::app()->db->createCommand()->insert('relacion_materia',array('id_materia_hija'=>$model->id_materia,'id_materia_padre'=>$itb->id_materia_hija));			
+									}
+									error_log('SALI del for');
+				
+								}else {
+									$sql = Yii::app()->db->createCommand()->insert('relacion_materia',array('id_materia_hija'=>$model->id_materia,'id_materia_padre'=>$x->id_materia));
+									error_log('No trajo informacion');
+								}
+							//error_log('ahora guardar materia');
+							
+									
+									$this->redirect(array('view','id'=>$model->id_materia));
+							} else {
+								
+								
+									if($model->save())  // Si el codigo a relacionar viene nulo debe guardar 
+									$this->redirect(array('view','id'=>$model->id_materia));
+							}
+						
+			}// fin del segundo else. El codigo de la materia ya esta siendo usado 	
+		}
+				
+				
+				
+				
+				
+				
 		}
 
 		$this->render('update',array(
@@ -255,6 +406,19 @@ class MateriaController extends Controller
           
 			
 			
+	}
+	
+	
+	
+	/**
+	 * Lists all models.
+	 */
+	public function actionHistorico()
+	{
+		$dataProvider=new CActiveDataProvider('Materia');
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+		));
 	}
 
 	

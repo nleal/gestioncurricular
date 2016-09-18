@@ -26,14 +26,10 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Programas</h1>
+<h1>Administrar Programas</h1>
+<hr>
 
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
-
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php echo CHtml::link('Busqueda Avanzada','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -45,12 +41,23 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id_programa',
-		'status',
+		array(
+		'name'=>'status',
+		'filter'=>CHtml::activeTextField($model, 'status'),
+        'value'=>'Status::Model()->FindByPk($data->status)->nombre',
+        'header'=>'Estatus'
+    ),
+		//'status',
 		'fecha',
 		'file',
-		'id_materia',
 		array(
+    'name'=>'id_materia',
+    'filter'=>CHtml::activeTextField($model, 'id_materia'),
+        'value'=>'Materia::Model()->FindByPk($data->id_materia)->nombre_mat',
+        'header'=>'Materia',
+       
+    ),
+			array(
 			'class'=>'CButtonColumn',
 		),
 	),

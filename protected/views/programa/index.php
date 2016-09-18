@@ -13,7 +13,7 @@ $this->menu=array(
 ?>
 
 <h1>Programas</h1>
-
+<hr>
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',

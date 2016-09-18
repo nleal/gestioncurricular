@@ -17,7 +17,7 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'id_departamento'); ?>
+		<?php echo $form->label($model,'Departamento'); ?>
 		<?php echo $form->textField($model,'id_departamento'); ?>
 	</div>
 

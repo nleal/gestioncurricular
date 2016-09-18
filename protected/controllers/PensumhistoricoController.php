@@ -28,11 +28,11 @@ class PensumhistoricoController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','listar','inactivos'),
+				'actions'=>array('index','view','listar','inactivos','cosa'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','listar','inactivos'),
+				'actions'=>array('create','update','listar','inactivos','cosa'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -56,34 +56,60 @@ class PensumhistoricoController extends Controller
 		));
 	}
 
+
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionCreate()
-	{
-		$model=new Pensumhistorico;
+    {
+        $model=new Pensumhistorico;
+        error_log("Entre a crear");
+        if(isset($_POST['Pensumhistorico']))
+        {
+            $model->attributes=$_POST['Pensumhistorico'];
+            $tempSave=CUploadedFile::getInstance($model, 'file');
+            $id=rand(10,99);
+            $model->file = $tempSave.'_'.$id.'.pdf';
+            //$x = $this->nueva($model);
+           
+        $res='true';
+        $var = $model->id_departamento;
+        $cli = new MiCliente();
+        $res = $cli->obtenerMensajeRemoto($var);
+         error_log($_POST['nataly']);  
+        if($res=='true' || $model->status==2){ 
+            error_log('valor del servicio '.$res);
+                if($model->save())
+                    $tempSave->saveAs(Yii::app()->basePath.'/../uploads/' . $tempSave.'_'.$id.'.pdf');
+                    $this->redirect(array('view','id'=>$model->id_pensum_hist));
+        }else{
+			Yii::app()->user->setFlash('error', "Ya existe un Pensum vigente para el Departamento");
+            error_log('Existe uno con viegente ');
+            
+            
+            }
+        }
+        $this->render('create',array(
+            'model'=>$model,
+        ));
+    }
 
-		
 
-		if(isset($_POST['Pensumhistorico']))
-		{
-			$model->attributes=$_POST['Pensumhistorico'];
-			$tempSave=CUploadedFile::getInstance($model, 'file');
-			
-			$id=rand(10,99);
-			
+	public function actionCosa(){
 		
-			$model->file = $tempSave.'_'.$id.'.pdf';
-			if($model->save())
-			$tempSave->saveAs(Yii::app()->basePath.'/../uploads/' . $tempSave.'_'.$id.'.pdf');
-				$this->redirect(array('view','id'=>$model->id_pensum_hist));
+		error_log('ESTOY EN MOSTRAAAAARRRR BASASASASAS');
+		
+		 /*$consul = Yii::app()->db->createCommand("UPDATE pensumhistorico  ".
+									   "SET status = '2' ".
+									  "WHERE id_departamento = '".$model->id_departamento."' AND status = '1' " )->execute();
+
+		if(count($consul)>0 && $model->save()){
+			$this->redirect(array('view','id'=>$model->id_pensum_hist));  
+           }*/
+           $return['message'] = 1;  
+           echo json_encode($return);
 		}
-
-		$this->render('create',array(
-			'model'=>$model,
-		));
-	}
 
 	/**
 	 * Updates a particular model.
@@ -186,7 +212,7 @@ class PensumhistoricoController extends Controller
 				
 				if($res_js){
 						$res_js=json_decode($res_js);
-				$this->render("listar",array("res_js"=>$res_js,"twitter"=>$twitter));	 
+						$this->render("listar",array("res_js"=>$res_js,"twitter"=>$twitter));	 
 				}
 				
 		 }
@@ -212,4 +238,57 @@ class PensumhistoricoController extends Controller
 		
 		
 		}	 	 
+		
+		
+		public function actionListaDepartamento(){
+			$mode1=Departamento::model()->findAll();
+			$twitter = "@basa90";
+			$this->render("listardepartamento",array("mode1"=>$mode1,"twitter"=>$twitter));	 
+		 }
+		 
+		 public function actionMostrar(){
+			 error_log('ESTOY EN MOSTRAAAAARRRR');
+			 
+			 
+			 $resultado = $_GET['id_departamento'];
+				$div ='';
+			
+	  
+			$div .= '<table class="normal"><tr> <th>Materia</th><th> Descargar </th>';
+			$div .= '</tr>';	
+				
+				error_log('alertaaaaaaaaaas: '.$resultado);
+				
+				$cli = new MiCliente();
+			
+					$res = $cli->getInactivos($resultado);	
+					
+					error_log('Countmateriaaaaaaaaaaaaaaaaaaa: '.count($res)); 
+							
+					if($res){
+						
+								$res_js=json_decode($res);
+						
+						foreach( $res_js as $it){
+																
+								$div .= '<tr><td>-'.$it->nombre_mat.'';
+								$div .= '</td>';
+							//$div .= '<td>Ver</td></tr>';
+							$div .= '<td><a href='.Yii::app()->request->baseUrl.'/uploads/'.$it->file.'><img  width=20px height=20px src=/gc/themes/tgr/images/pdf.gif /></a></td></tr>';
+							//$div .= '<td><a href="#" title="Ver">'Yii::app()->request->baseUrl."/uploads/".$it->file.'</a></td></tr>';
+						//	$div .= '<td><a href="#" title="'. $data3->definicion_caracteristica.'">'.$data3->nombre_caracteristica.'MONSE'.'</a></td>';
+		
+							
+							
+						}
+							$div .='</table>';
+							
+					}else $div = '**Este departamento aun no posee un pensum**';
+					
+					
+					
+				
+				$return['message'] = $div;
+				echo json_encode($return);
+		}
 }

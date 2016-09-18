@@ -55,10 +55,10 @@ class Programa extends CActiveRecord
 	{
 		return array(
 			'id_programa' => 'Id Programa',
-			'status' => 'Status',
+			'status' => 'Estatus',
 			'fecha' => 'Fecha',
-			'file' => 'File',
-			'id_materia' => 'Id Materia',
+			'file' => 'Documento',
+			'id_materia' => 'Materia',
 		);
 	}
 

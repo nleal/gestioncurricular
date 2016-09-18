@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'agenda':
  * @property integer $id_agenda
+ * @property string $num_agenda
  * @property string $lugar
  * @property string $fecha
  * @property string $hora
@@ -39,11 +40,12 @@ class Agenda extends CActiveRecord
 			array('lugar', 'length', 'max'=>50),
 			array('status', 'length', 'max'=>2),
 			array('temario', 'length', 'max'=>200),
+			array('num_agenda', 'length', 'max'=>15),
 			array('file', 'length', 'max'=>255),
 			array('hora, fecha_creacion', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_agenda, lugar, fecha, hora, fecha_creacion, fecha_cierre, status, temario, id_usuario, id_acta, file', 'safe', 'on'=>'search'),
+			array('id_agenda, num_agenda, lugar, fecha, hora, fecha_creacion, fecha_cierre, status, temario, id_usuario, id_acta, file', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,17 +66,18 @@ class Agenda extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_agenda' => 'Id Agenda',
+			'id_agenda' => 'id Agenda',
+			'num_agenda' => 'Numero Agenda',
 			'lugar' => 'Lugar',
 			'fecha' => 'Fecha',
 			'hora' => 'Hora',
 			'fecha_creacion' => 'Fecha Creacion',
 			'fecha_cierre' => 'Fecha Cierre',
-			'status' => 'Status',
+			'status' => 'Estatus',
 			'temario' => 'Temario',
 			'id_usuario' => 'Id Usuario',
 			'id_acta' => 'Id Acta',
-			'file' => 'File',
+			'file' => 'Documento',
 		);
 	}
 
@@ -97,6 +100,7 @@ class Agenda extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_agenda',$this->id_agenda);
+		$criteria->compare('num_agenda',$this->num_agenda,true);
 		$criteria->compare('lugar',$this->lugar,true);
 		$criteria->compare('fecha',$this->fecha,true);
 		$criteria->compare('hora',$this->hora,true);

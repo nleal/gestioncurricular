@@ -17,7 +17,7 @@ $this->menu=array(
 ?>
 
 <h1>View Agenda #<?php echo $model->id_agenda; ?></h1>
-
+<hr>
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
@@ -34,3 +34,13 @@ $this->menu=array(
 		'file',
 	),
 )); ?>
+
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Operaciones',
+		));
+		$this->widget('zii.widgets.CMenu', array(
+			'items'=>$this->menu,
+			'htmlOptions'=>array('class'=>'art-vmenu'),
+		));
+		$this->endWidget();
+		?>

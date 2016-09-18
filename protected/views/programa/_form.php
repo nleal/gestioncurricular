@@ -8,14 +8,14 @@
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'programa-form',
-		'enableClientValidation' => true,
+	'enableClientValidation' => true,
 	'clientOptions' => array(
                             'validateOnSubmit' => true,
                         ),
     'htmlOptions' => array('enctype' => 'multipart/form-data'),
 	'enableAjaxValidation'=>false,
 )); ?>
-
+<?php echo CHtml::link('Cargar Nueva Asignatura',Yii::app()->createUrl('materia/create')) ;?>
 <p class="note">Los campos con  <span class="required">*</span> son obligatorios</p>
 
 	<?php echo $form->errorSummary($model); ?>
@@ -34,8 +34,12 @@
 								'duration'=>'fast',
 								'showAnim'=>'show',
 								'minDate'=>date("Y-m-d"),
+								'changeMonth'=>true,
+								'changeYear'=>true,
+								'yearRange'=>'1900:2099',
+								'minDate' => '1900-01-01',      
+								'maxDate' => '2099-12-31',
 						),
-	
 					)
 				);
 		?>
@@ -113,7 +117,7 @@ foreach($model_mats as $model_mat){
 	</div>
 
 
-	<div class="row buttons">
+	<div class="row buttons buttonSave">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Guardar' : 'Save'); ?>
 	</div>
 

@@ -47,14 +47,20 @@ $this->breadcrumbs=array(
 
 <hr>
 
-<center>
 
-<select name="depart" id="depart">
+<div id="selectDept" class="selectDept" >
+ <select name="depart" id="depart">
+	
 <?php foreach($mode1 as $data): ?>
 	<h1><?php //echo $data->id_matriz.' - '. $data->nombre_matriz;?></h1>
     <option value="<?php echo $data->id_departamento?>"><?php echo $data->nombre?></option>
 <?php endforeach; ?>
  </select>	
+ <div>
  
- <div id="mostrar_matriz"></div>
-</center>
+ <div id="mostrar_matriz">
+ 
+
+ 
+ </div>
+

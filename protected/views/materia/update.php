@@ -16,6 +16,15 @@ $this->menu=array(
 );
 ?>
 
-<h1>Actualizar Materia <?php echo $model->id_materia; ?></h1>
-
+<h1>Actualizar Asignatura <?php echo $model->nombre_mat; ?></h1>
+<hr>
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>
+
+
+
+<?php
+    foreach(Yii::app()->user->getFlashes() as $key => $message) {
+		
+		echo '<script>alert("'.$message.'") </script>';
+    }
+?>

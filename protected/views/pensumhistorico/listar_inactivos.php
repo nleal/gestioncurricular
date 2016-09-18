@@ -9,15 +9,15 @@ $this->breadcrumbs=array(
 ?>
 
 
-<h1>Escuelas</h1>
+<h1>Departamento : <?php echo $res_js[0]->nombre  ?> </h1> 
+<hr>
 
 <table border='0'>
-    <table border="0"><tr><th>#</th> <th>Departamentos</th><th>Exportar</th>
+    <table border="0"><tr><th>Año</th> ><th>Exportar</th>
     
     <?php foreach ($res_js as $data) { ?>
     
-    <tr><td><?php echo $data->id_departamento?></td>	
-    <td><?php echo $data->nombre?></td>
+    <tr><td><?php echo $data->fecha?></td>	
     <td><?php  echo CHtml::link('Ver', Yii::app()->request->baseUrl."/uploads/".$data->file,array("target"=>"_blank"))?></td>
     
      

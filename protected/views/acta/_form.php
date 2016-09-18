@@ -28,9 +28,15 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'Numero de Agenda'); ?>
-		<?php echo $form->textField($model,'id_agenda'); ?>
+		<?php echo $form->dropDownList($model,'id_agenda', CHtml::listData( Agenda::model()->findAll(
+		'status=:status', array(':status' => '1')),	
+    'id_agenda', 'id_agenda'),array('empty'=>'Seleccione...', 'id_agenda'=>'id_agenda')); ?>
 		<?php echo $form->error($model,'id_agenda'); ?>
 	</div>
+
+
+
+
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'lugar'); ?>
@@ -57,6 +63,13 @@
 								'duration'=>'fast',
 								'showAnim'=>'show',
 								'minDate'=>date("Y-m-d"),
+								'changeMonth'=>true,
+								'changeYear'=>true,
+								'changeMonth'=>true,
+								'changeYear'=>true,
+								'yearRange'=>'1900:2099',
+								'minDate' => '1900-01-01',      
+								'maxDate' => '2099-12-31',
 						),
 	
 					)
@@ -64,7 +77,7 @@
 		?>
 		<?php echo $form->error($model,'fecha'); ?>
 	</div>
-
+<div class="row">
 <?php $model_deps=Departamento::model()->findAll(); 
 			foreach($model_deps as $model_dep){
 echo '				
@@ -106,6 +119,7 @@ foreach($model_mats as $model_mat){
   echo '</fieldset> ';						
 }
 ?>
+</div>
 	<div class="row">
 	<?php echo $form->labelEx($model,'Archivo'); ?>
     <?php echo $form->fileField($model,'file'); ?>
@@ -113,7 +127,7 @@ foreach($model_mats as $model_mat){
     $infoFieldFile = (end($form->attributes)); ?>
 	</div>
 
-	<div class="row buttons">
+	<div class="row buttons buttonSave">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Guardar' : 'Save'); ?>
 	</div>
 

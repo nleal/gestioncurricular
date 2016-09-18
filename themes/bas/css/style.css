@@ -58,11 +58,11 @@ h1,h2, h3, h4, h5, h6 {
 
 
 .row,.row-fluid {
-	margin-bottom:30px;
+	margin-bottom:3px;
 }
 
 .row .row,.row-fluid .row-fluid{
-	margin-bottom:30px;
+	margin-bottom:3px;
 }
 
 .row.nomargin,.row-fluid.nomargin {
@@ -2013,9 +2013,10 @@ max-width: 250px;
 }
 .form label {
     /*display: block;*/
-    margin: 0px;
+    
 }
-.form label>span {
+.form label {
+	margin: 0px;
     float: left;
     width: 20%;
     text-align: right;
@@ -2056,4 +2057,22 @@ max-width: 250px;
 }
 .form textarea{
     height:100px;
+}
+
+/*Button Save*/
+.buttonSave{
+	text-align:center;
+}
+
+
+.selectDept{
+	text-align: center;
+}
+
+.view{
+	margin-bottom:15px
+}
+
+ul.nav li.dropdown:hover> ul.dropdown-menu{
+	display : block;
 }

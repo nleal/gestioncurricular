@@ -8,6 +8,7 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Gestion curricular',
+	'language'=>'es',
 	'theme'=>'bas',
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -85,7 +86,7 @@ return array(
 			'connectionString' => 'mysql:host=localhost;dbname=gcnueva',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => '19020820',
+			'password' => '1234',
 			'charset' => 'utf8',
 		),
 		

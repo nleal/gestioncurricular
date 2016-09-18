@@ -10,6 +10,8 @@
  * @property integer $id_departamento
  * @property integer $id_materia
  * @property string $cod_materia
+ * @property integer $anio_final
+ * @property string $cod_materia_padre
  */
 class Materia extends CActiveRecord
 {
@@ -30,13 +32,13 @@ class Materia extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('nombre_mat, descripcion, status, id_departamento, cod_materia', 'required'),
-			array('id_departamento', 'numerical', 'integerOnly'=>true),
+			array('id_departamento, anio_final', 'numerical', 'integerOnly'=>true),
 			array('nombre_mat, descripcion', 'length', 'max'=>50),
 			array('status', 'length', 'max'=>2),
-			array('cod_materia', 'length', 'max'=>10),
+			array('cod_materia, cod_materia_padre', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('nombre_mat, descripcion, status, id_departamento, id_materia, cod_materia', 'safe', 'on'=>'search'),
+			array('nombre_mat, descripcion, status, id_departamento, id_materia, cod_materia, anio_final, cod_materia_padre', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,12 +59,14 @@ class Materia extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'nombre_mat' => 'Nombre Mat',
+			'nombre_mat' => 'Asignatura',
 			'descripcion' => 'Descripcion',
-			'status' => 'Status',
-			'id_departamento' => 'Id Departamento',
-			'id_materia' => 'Id Materia',
-			'cod_materia' => 'Cod Materia',
+			'status' => 'Estatus',
+			'id_departamento' => 'Departamento',
+			'id_materia' => 'Asignatura',
+			'cod_materia' => 'Codigo Asignatura',
+			'anio_final' => 'Año Final',
+			'cod_materia_padre' => 'Código de asignatura padre',
 		);
 	}
 
@@ -90,6 +94,8 @@ class Materia extends CActiveRecord
 		$criteria->compare('id_departamento',$this->id_departamento);
 		$criteria->compare('id_materia',$this->id_materia);
 		$criteria->compare('cod_materia',$this->cod_materia,true);
+		$criteria->compare('anio_final',$this->anio_final);
+		$criteria->compare('cod_materia_padre',$this->cod_materia_padre,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

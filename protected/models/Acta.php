@@ -64,7 +64,7 @@ class Acta extends CActiveRecord
 			'lugar' => 'Lugar',
 			'hora' => 'Hora',
 			'fecha' => 'Fecha',
-			'file' => 'File',
+			'file' => 'Documento',
 		);
 	}
 

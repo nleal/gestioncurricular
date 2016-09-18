@@ -96,7 +96,7 @@ abstract class CApplication extends CModule
 	 * @var string the language that the application is written in. This mainly refers to
 	 * the language that the messages and view files are in. Defaults to 'en_us' (US English).
 	 */
-	public $sourceLanguage='en_us';
+	public $sourceLanguage='es';
 
 	private $_id;
 	private $_basePath;
