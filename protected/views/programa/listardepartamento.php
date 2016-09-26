@@ -43,7 +43,7 @@ $this->breadcrumbs=array(
 	</script>
 
 
-<h1>Programas por Departamento</h1>
+<h1>Consultar Programas </h1>
 
 <hr>
 

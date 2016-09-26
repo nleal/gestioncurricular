@@ -3,7 +3,7 @@
 /* @var $model Materia */
 
 $this->breadcrumbs=array(
-	'Materias'=>array('index'),
+	'Asignaturas'=>array('index'),
 	$model->id_materia,
 );
 

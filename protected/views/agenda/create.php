@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create Agenda</h1>
+<h1>Crear Agenda</h1>
 <hr>
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

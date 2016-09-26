@@ -15,7 +15,7 @@ $this->breadcrumbs=array(
 ?>
 
 
-<h1>Pensum</h1>
+<h1>Consultar Pensum</h1>
 <hr>
 
     <table><tr> <th>Departamentos</th><th>Actual</th><th>Historico</th>

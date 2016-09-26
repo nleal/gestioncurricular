@@ -96,5 +96,11 @@ class MiCliente extends CApplicationComponent
 	public function programavigente($argX) {
         return $this->getClienteInt()->getProgramavigente($argX);
     }
+	public function historicomat2($argX) {
+        return $this->getClienteInt()->getProgramavigente($argX);
+    }
+	public function historicomat($uname) {
+        return $this->getClienteInt()->getHistoricomat($uname);
+    }
     
 } 

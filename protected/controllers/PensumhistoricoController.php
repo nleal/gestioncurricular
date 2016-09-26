@@ -28,11 +28,11 @@ class PensumhistoricoController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','listar','inactivos','cosa'),
+				'actions'=>array('index','view','listar','inactivos','cosa','cosa2'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','listar','inactivos','cosa'),
+				'actions'=>array('delete','admin','create','update','listar','inactivos','cosa','cosa2'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -64,7 +64,7 @@ class PensumhistoricoController extends Controller
 	public function actionCreate()
     {
         $model=new Pensumhistorico;
-        error_log("Entre a crear");
+        error_log("Entre a crear de basa");
         if(isset($_POST['Pensumhistorico']))
         {
             $model->attributes=$_POST['Pensumhistorico'];
@@ -75,20 +75,20 @@ class PensumhistoricoController extends Controller
            
         $res='true';
         $var = $model->id_departamento;
-        $cli = new MiCliente();
-        $res = $cli->obtenerMensajeRemoto($var);
-         error_log($_POST['nataly']);  
-        if($res=='true' || $model->status==2){ 
-            error_log('valor del servicio '.$res);
+        //$cli = new MiCliente();
+        //$res = $cli->obtenerMensajeRemoto($var);
+        // error_log($_POST['nataly']);  
+        /*if($res=='true' || $model->status==2){ 
+            error_log('valor del servicio '.$res);*/
                 if($model->save())
                     $tempSave->saveAs(Yii::app()->basePath.'/../uploads/' . $tempSave.'_'.$id.'.pdf');
                     $this->redirect(array('view','id'=>$model->id_pensum_hist));
-        }else{
+        /*}else{
 			Yii::app()->user->setFlash('error', "Ya existe un Pensum vigente para el Departamento");
             error_log('Existe uno con viegente ');
             
             
-            }
+            }*/
         }
         $this->render('create',array(
             'model'=>$model,
@@ -98,19 +98,44 @@ class PensumhistoricoController extends Controller
 
 	public function actionCosa(){
 		
-		error_log('ESTOY EN MOSTRAAAAARRRR BASASASASAS');
+		//$basa = new MiCliente();
+		//$basa->Verificartapi();
 		
-		 /*$consul = Yii::app()->db->createCommand("UPDATE pensumhistorico  ".
-									   "SET status = '2' ".
-									  "WHERE id_departamento = '".$model->id_departamento."' AND status = '1' " )->execute();
-
-		if(count($consul)>0 && $model->save()){
-			$this->redirect(array('view','id'=>$model->id_pensum_hist));  
-           }*/
-           $return['message'] = 1;  
+		error_log('ESTOY EN MOSTRAAAAARRRR BASASASASAS');
+		$id_departamento = $_GET['id_departamento'];
+		$id_status = $_GET['id_status'];
+       	
+       	error_log("Dep: ".$id_departamento);
+		$consul = Yii::app()->db->createCommand("SELECT * ".
+												"FROM  pensumhistorico ".
+												"WHERE id_departamento = '".$id_departamento."' AND status = '1'")->queryAll();
+		
+		if(count($consul)>0 && $id_status==1 )
+			$return['message'] = 1;
+		else 
+			$return['message'] = 0;
+		
+		            
            echo json_encode($return);
 		}
-
+		
+		
+		
+		public function actionCosa2(){
+		$id_departamento = $_POST['id_departamento'];
+       		
+			$consul = Yii::app()->db->createCommand("UPDATE pensumhistorico  ".
+									   "SET status = '2' ".
+									  "WHERE id_departamento = '".$id_departamento."' AND status = '1' " )->execute();
+			if(count($consul>0)){
+					$return['message'] = 1;
+				}else{
+					$return['message'] = 0;
+					}
+			
+           echo json_encode($return);
+		}
+		
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -119,20 +144,47 @@ class PensumhistoricoController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
+		$name_file_old = $model->file;
+		error_log("Voy a actualizar");
+		
 		if(isset($_POST['Pensumhistorico']))
 		{
 			$model->attributes=$_POST['Pensumhistorico'];
-			if($model->save())
+			$tempSave=CUploadedFile::getInstance($model, 'file');
+			
+			
+			if($tempSave){
+					$id=rand(10,99);
+					$model->file = $tempSave.'_'.$id.'.pdf';
+				}else{
+					error_log("Entre y el nombre a asignar es: ".$name_file_old);
+					$model->file = $name_file_old;
+			}
+			
+			if($model->validate()){
+			if($model->save()){
+				
+				if(!empty($tempSave))  // check if uploaded file is set or not
+                {
+					error_log("Si guarde");
+                    //$uploadedFile->saveAs(Yii::app()->basePath.'/../banner/'.$model->image);
+                    error_log(Yii::app()->basePath.'/../banner/');
+                    $tempSave->saveAs(Yii::app()->basePath.'/../uploads/'.$tempSave.'_'.$id.'.pdf');
+                }else{
+					error_log("NO guarde");
+					}
+				
+				/*if($tempSave){
+					$tempSave->saveAs(Yii::app()->basePath.'/../uploads/'.$tempSave.'_'.$id.'.pdf');
+				}*/
 				$this->redirect(array('view','id'=>$model->id_pensum_hist));
+			}}
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
 		));
+		
 	}
 
 	/**

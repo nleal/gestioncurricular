@@ -29,12 +29,15 @@ class Pensumhistorico extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_departamento, status, fecha, file', 'required'),
+			array('id_departamento, status, fecha', 'required'),
 			array('id_departamento, status', 'numerical', 'integerOnly'=>true),
-			array('file', 'length', 'max'=>500),
+			array('file', 'length', 'max'=>5000),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id_pensum_hist, id_departamento, status, fecha, file', 'safe', 'on'=>'search'),
+			//Imagen
+			array('file', 'required', 'on' => 'insert'),
+			array('file', 'file','types'=>'pdf', 'allowEmpty'=>true, 'on'=>'update'),
 		);
 	}
 

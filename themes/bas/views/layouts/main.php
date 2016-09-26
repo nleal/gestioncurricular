@@ -53,7 +53,7 @@ Yii::app()->clientScript->registerCoreScript('bbq');
                 <div class="navbar-collapse collapse ">
 					<nav>
 		<?php 
-		
+
 		
 		$this->widget('zii.widgets.CMenu',array(
 		'id'=>'art-hmenu',	
@@ -64,45 +64,47 @@ Yii::app()->clientScript->registerCoreScript('bbq');
 										'class' => 'dropdown-toggle',
 										'data-toggle' => 'dropdown',),
 										'itemOptions' => array('class'=>'dropdown')
-									,'url'=>array(''),'visible'=>!Yii::app()->user->isGuest,
+									,'url'=>array(''),'visible'=>(Yii::app()->user->checkAccess('coordinador') ||  Yii::app()->user->checkAccess('director') ),
                                 'items'=>array(
-										array('label'=>'Cargar', 'url'=>array('/materia/create')),
-                                        array('label'=>'Administrar', 'url'=>array('/materia/admin')),
-                                        array('label'=>'Consulta', 'url'=>array('/materia/historico')),
+										array('label'=>'Cargar', 'url'=>array('/materia/create'),'visible'=>Yii::app()->user->checkAccess('director')),
+                                        array('label'=>'Administrar', 'url'=>array('/materia/admin'),'visible'=>Yii::app()->user->checkAccess('director')),
+                                        array('label'=>'Consulta Asigantura', 'url'=>array('/materia/historico') ,'visible'=>(Yii::app()->user->checkAccess('coordinador') || Yii::app()->user->checkAccess('director'))),
+                                        //array('label'=>'Configuracion por periodos', 'url'=>array('/MatDepNivel/create'),'visible'=>Yii::app()->user->checkAccess('director')),
+                                        array('label'=>'Historico', 'url'=>array('/materia/listarhistoricomatria'),'visible'=>Yii::app()->user->checkAccess('director')),
 										),'class'=>'dropdown' ),                                
 								array('label'=>'Usuarios ▼',
 										'linkOptions'=> array(
 										'class' => 'dropdown-toggle',
 										'data-toggle' => 'dropdown',),
 										'itemOptions' => array('class'=>'dropdown')
-									,'url'=>array(''),'visible'=>!Yii::app()->user->isGuest,
+									,'url'=>array(''),'visible'=>(Yii::app()->user->checkAccess('admin')),
                                 'items'=>array(
-										array('label'=>'Cargar', 'url'=>array('/usuario/create')),
-                                        array('label'=>'Administrar', 'url'=>array('/usuario/admin')),
+										array('label'=>'Cargar Usuario', 'url'=>array('/usuario/create'),'visible'=>(Yii::app()->user->checkAccess('director') || Yii::app()->user->checkAccess('admin'))),
+                                        array('label'=>'Administrar', 'url'=>array('/usuario/admin'),'visible'=>(Yii::app()->user->checkAccess('director') || Yii::app()->user->checkAccess('admin'))),
 										),'class'=>'dropdown' ),
                                 array('label'=>'Pensum ▼',
 										'linkOptions'=> array(
 										'class' => 'dropdown-toggle',
 										'data-toggle' => 'dropdown',),
 										'itemOptions' => array('class'=>'dropdown')
-									,'url'=>array(''),'visible'=>!Yii::app()->user->isGuest,
+									,'url'=>array(''),'visible'=>(Yii::app()->user->checkAccess('coordinador') || Yii::app()->user->checkAccess('director') ),
                                 'items'=>array(
-										array('label'=>'Cargar', 'url'=>array('/pensumhistorico/create')),
-                                        array('label'=>'Consultar', 'url'=>array('/pensumhistorico/listar')),
-                                        array('label'=>'Administrar', 'url'=>array('/pensumhistorico/admin')),
+										array('label'=>'Cargar', 'url'=>array('/pensumhistorico/create'),'visible'=>Yii::app()->user->checkAccess('director')),
+                                        array('label'=>'Consultar', 'url'=>array('/pensumhistorico/listar'),'visible'=>(Yii::app()->user->checkAccess('coordinador')|| Yii::app()->user->checkAccess('director'))),
+                                        array('label'=>'Administrar', 'url'=>array('/pensumhistorico/admin'),'visible'=>Yii::app()->user->checkAccess('director')),
 										),'class'=>'dropdown' ),
                                 array('label'=>'Programa ▼', 
 										'linkOptions'=> array(
 										'class' => 'dropdown-toggle',
 										'data-toggle' => 'dropdown',),
 										'itemOptions' => array('class'=>'dropdown')
-									,'url'=>array(''),'visible'=>!Yii::app()->user->isGuest,
+									,'url'=>array(''),'visible'=>(Yii::app()->user->checkAccess('coordinador') || Yii::app()->user->checkAccess('director')),
 										'items'=>array(
-										array('label'=>'Cargar', 'url'=>array('/programa/create')),
-                                        array('label'=>'Consultar', 'url'=>array('/programa/listadepartamento')),
-                                        array('label'=>'Administar ', 'url'=>array('/programa/admin')),
-                                        array('label'=>'Administrar Materia', 'url'=>array('/materia/admin')),
-                                        array('label'=>'Agregar Materia', 'url'=>array('/materia/create')),
+										array('label'=>'Cargar', 'url'=>array('/programa/create'),'visible'=>Yii::app()->user->checkAccess('director')),
+                                        array('label'=>'Consultar Programa', 'url'=>array('/programa/listadepartamento'),'visible'=>(Yii::app()->user->checkAccess('coordinador')|| Yii::app()->user->checkAccess('director'))),
+                                        array('label'=>'Administar ', 'url'=>array('/programa/admin'),'visible'=>Yii::app()->user->checkAccess('director')),
+                                        array('label'=>'Administrar Asignatura', 'url'=>array('/materia/admin'),'visible'=>Yii::app()->user->checkAccess('director')),
+                                        array('label'=>'Agregar Asignatura', 'url'=>array('/materia/create'),'visible'=>Yii::app()->user->checkAccess('director')),
 										)
                                 ),
                                 array('label'=>'Agenda ▼', 
@@ -110,11 +112,11 @@ Yii::app()->clientScript->registerCoreScript('bbq');
 										'class' => 'dropdown-toggle',
 										'data-toggle' => 'dropdown',),
 										'itemOptions' => array('class'=>'dropdown')
-									,'url'=>array('/agenda/index'),'visible'=>!Yii::app()->user->isGuest ,
+									,'url'=>array('/agenda/index'),'visible'=>(Yii::app()->user->checkAccess('coordinador') || Yii::app()->user->checkAccess('director')),
 										'items'=>array(
-										array('label'=>'Cargar', 'url'=>array('/agenda/create')),
-                                        array('label'=>'Consultar', 'url'=>array('/agenda/listaagenda')),
-                                        array('label'=>'Administrar', 'url'=>array('/agenda/admin')),
+										array('label'=>'Cargar Agenda', 'url'=>array('/agenda/create'),'visible'=>Yii::app()->user->checkAccess('director')),
+                                        array('label'=>'Consultar', 'url'=>array('/agenda/listaagenda'),'visible'=>(Yii::app()->user->checkAccess('coordinador') || Yii::app()->user->checkAccess('coordinador'))),
+                                        array('label'=>'Administrar', 'url'=>array('/agenda/admin'),'visible'=>Yii::app()->user->checkAccess('director')),
 										)
                                 ),
                                 array('label'=>'Actas ▼', 
@@ -122,11 +124,11 @@ Yii::app()->clientScript->registerCoreScript('bbq');
 										'class' => 'dropdown-toggle',
 										'data-toggle' => 'dropdown',),
 										'itemOptions' => array('class'=>'dropdown')
-									,'url'=>array('/acta/index'),'visible'=>!Yii::app()->user->isGuest,
+									,'url'=>array('/acta/index'),'visible'=>(Yii::app()->user->checkAccess('coordinador') || Yii::app()->user->checkAccess('director') ),
 										'items'=>array(
-										array('label'=>'Cargar', 'url'=>array('/acta/create')),
-										array('label'=>'Administrar', 'url'=>array('/acta/admin')),
-                                        array('label'=>'Consultar', 'url'=>array('/acta/listaactas')),
+										array('label'=>'Cargar', 'url'=>array('/acta/create'),'visible'=>Yii::app()->user->checkAccess('director')),
+										array('label'=>'Administrar', 'url'=>array('/acta/admin'),'visible'=>Yii::app()->user->checkAccess('director')),
+                                        array('label'=>'Consultar', 'url'=>array('/acta/listaactas'),'visible'=>(Yii::app()->user->checkAccess('coordinador')|| Yii::app()->user->checkAccess('director'))),
 										)),
 								array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 								array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)

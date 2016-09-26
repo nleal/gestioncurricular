@@ -32,11 +32,11 @@ class MateriaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','lista_materia','lista_actas_materia','reporte_acta','historico'),
+				'actions'=>array('index','view','lista_materia','lista_actas_materia','reporte_acta','historico','listarhistoricomatria','generarpensum'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','lista_materia','lista_actas_materia', 'reporte_acta', 'hisotrico'),
+				'actions'=>array('create','update','lista_materia','lista_actas_materia', 'reporte_acta', 'hisotrico','listarhistoricomatria', 'generarpensum'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -420,6 +420,84 @@ error_log('pdm......................');
 			'dataProvider'=>$dataProvider,
 		));
 	}
+
+	public function  actionlistarhistoricomatria(){
+			$mode1=Departamento::model()->findAll();
+			$twitter = "@basa90";
+			$this->render("historicomatria",array("mode1"=>$mode1,"twitter"=>$twitter));	
+		
+		
+		}
+
+
+ public function actionGenerarPensum($id_departamento){
+			
+			
+			$mPDF1 = Yii::app()->ePdf->mpdf();
+			
+			 $mPDF1->WriteHTML(" <table  border=\"0\">
+                
+            <tr>
+                <td width=13% height=10  align=left>
+						<img  width=60px height=70px src=/gc/themes/tgr/images/uc.png />
+					</br>
+				</td>
+                <td width=20% height=10 align=center rowspan=2><b><i> Universidad de Carabobo
+					<br>Facultad Experimental de Ciencias y Tecnología</br>
+					<br align=center> Licenciatura en Computación</br> 
+				</td> 
+				<td	width=13% height=10  align=right>
+					<br>
+						<img  width=60px height=70px src=/gc/themes/tgr/images/facytp.png />
+					</br>
+				</td>
+            </tr>
+           
+                </table>");       
+			
+			$mPDF1->WriteHTML( "<p align=center>Departamento:  </p> ");
+			$mPDF1->WriteHTML(" <h1> <P align=center>Pensum</P>  </h1> \n");
+			
+			
+			error_log('llego a la declaracion ');
+				$cli = new MiCliente();
+			
+			
+			error_log('el departamento es  '.$id_departamento);
+			
+				$res_ob = $cli->historicomat($id_departamento);	
+			
+			$mPDF1->WriteHTML(" <table border=\"1\"><tr> <td>Codigo</td><td>Materia</td><td>Precedente</td></tr>");
+			
+				if($res_ob)
+				{
+					$res_ob=json_decode($res_ob);						
+					$var = 0;
+					foreach( $res_ob as $itb)
+					{
+						
+						
+					
+						
+					if ($var != $itb->nivel){
+						$mPDF1->WriteHTML( "<tr><td colspan='3'>".$itb->descripcion."</td></tr>");	
+						$var = $itb->nivel;	
+					}	
+						
+						$mPDF1->WriteHTML( "<tr>
+												<td>".$itb->cod_materia."</td>
+												<td>".$itb->nombre_mat."</td><td>".Materia::Model()->FindByPk($itb->id_materia_padre)->nombre_mat."</td> 
+											</tr>");			
+										
+					
+					}
+				}
+				
+				$mPDF1->WriteHTML("</table>");
+			
+			 $mPDF1->Output("_reporte".$id,  EYiiPdf::OUTPUT_TO_BROWSER);          
+		}
+
 
 	
 }

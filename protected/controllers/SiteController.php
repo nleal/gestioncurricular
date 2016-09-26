@@ -281,10 +281,37 @@ class SiteController extends Controller
 	* @soap
 	*/
 	
-	public function getBASA($uname){
+	public function getHistoricomat($uname){
 		
-		return 1;
-		}
+		
+		error_log('mega consulta ');
+		$evaluacion = Yii::app()->db->createCommand(" SELECT n.nivel,  m.cod_materia , r.id_materia_padre , m.nombre_mat , e.descripcion ".
+								"FROM mat_dep_nivel n ".
+								"inner join materia m on m.id_departamento = n.id_departamento ".
+								"inner join relacion_materia  r on m.id_materia= r.id_materia_hija ".
+								"inner join niveles e on e.nivel = n.nivel ".
+								"WHERE n.id_departamento = '".$uname."' and m.status ='S' ORDER by n.nivel ,  m.id_materia" )->queryAll();
+		
+		
+			if(count($evaluacion)>0){
+					foreach($evaluacion as $it){
+						$res_js[] = array("descripcion"=>$it['descripcion'],"nivel"=>$it['nivel'],"cod_materia"=>$it['cod_materia'] ,"id_materia_padre"=>$it['id_materia_padre'],"nombre_mat"=>$it['nombre_mat']); 
+					}
+					
+					return json_encode($res_js);
+			}else return null;
+			
+			
+			
+			/*SELECT *
+FROM mat_dep_nivel n
+inner join materia m on m.id_departamento = n.id_departamento
+inner join relacion_materia  r on m.id_materia= r.id_materia_hija 
+WHERE id_departamento = 2
+			*/
+		
+		
+				}
 	    
 	    
 	/**
@@ -554,4 +581,13 @@ class SiteController extends Controller
 					return $x;
 				}	
 	    }
+	
+	/**
+	* @param string argX
+	* @return string 
+	* @soap
+	*/   
+	public function getVerificarTapi(){
+		error_log("SI entre");
+		}    
 }

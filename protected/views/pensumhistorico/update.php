@@ -16,6 +16,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Pensumhistorico <?php echo $model->id_pensum_hist; ?></h1>
-
+<h1>Actualizar Pensum <?php echo $model->id_pensum_hist; ?></h1>
+<hr>
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

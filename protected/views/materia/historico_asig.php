@@ -9,7 +9,8 @@ $this->breadcrumbs=array(
 ?>
 
 	
-<h1>Historico de Materia</h1>
+<h1>Historico de Asignatura</h1>
+<hr>
 
 <table border="1">
     <table class="normal"><tr><th>#</th> <th>Carrera</th><th>Exportar</th>
