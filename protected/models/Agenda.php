@@ -67,11 +67,11 @@ class Agenda extends CActiveRecord
 	{
 		return array(
 			'id_agenda' => 'id Agenda',
-			'num_agenda' => 'Numero Agenda',
+			'num_agenda' => 'Número Agenda',
 			'lugar' => 'Lugar',
 			'fecha' => 'Fecha',
 			'hora' => 'Hora',
-			'fecha_creacion' => 'Fecha Creacion',
+			'fecha_creacion' => 'Fecha Creación',
 			'fecha_cierre' => 'Fecha Cierre',
 			'status' => 'Estatus',
 			'temario' => 'Temario',

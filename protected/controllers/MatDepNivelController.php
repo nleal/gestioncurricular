@@ -182,21 +182,6 @@ class MatDepNivelController extends Controller
 	}
 	
 
-	
-	/*public function actionSelectmunicipio()
-        {
-                 $id_uno= $_POST['TblEstado']['id']; 
-             $lista = TblMunicipio::model()->findAll('idestado = :id_uno',array(':id_uno' => $id_uno));
-             $lista = CHtml::listData($lista, 'id', 'municipio');
-
-                        echo CHtml::tag('option',array('value' => ''),'Seleccione un Municipio...',true);
-                    foreach($lista as $valor => $municipio)
-            {
-                echo CHtml::tag('option',array('value' => $valor),CHtml::encode($municipio), true);
-            }
-
-        }
-*/
 
 	public function actionMateriaselecionar() {
 		error_log('GHHHHHHH');
@@ -249,25 +234,6 @@ class MatDepNivelController extends Controller
     }
 
 	
-	/*
-	public function actionMateriaselecionar()
-        {
-			
-			error_log('llamada ajax');
-                 $id_uno= $_POST['Departamento']['id_departamento']; 
-            error_log('valor de departamento'.$id_uno);     
-             $lista = Materia::model()->findAll('id_departamento =' .$id_uno,array(':id_uno' => $id_uno));
-            error_log($lista);      
-            error_log('bueno ');      
-             $lista = CHtml::listData($lista, 'id_materia', 'nombre_mat');
-
-                        echo CHtml::tag('option',array('value' => ''),'Seleccione un Municipio...',true);
-                    foreach($lista as $valor => $nombre_mat)
-            {
-                echo CHtml::tag('option',array('value' => $valor),CHtml::encode($nombre_mat), true);
-            }
-
-        }*/
 
 	
 	

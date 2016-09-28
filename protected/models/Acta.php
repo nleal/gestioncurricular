@@ -59,8 +59,8 @@ class Acta extends CActiveRecord
 	{
 		return array(
 			'id_acta' => 'Id Acta',
-			'reunion' => 'Reunion',
-			'id_agenda' => 'Id Agenda',
+			'reunion' => 'Reunión',
+			'id_agenda' => 'Número de  Agenda',
 			'lugar' => 'Lugar',
 			'hora' => 'Hora',
 			'fecha' => 'Fecha',

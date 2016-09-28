@@ -58,7 +58,7 @@ class Pensumhistorico extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_pensum_hist' => 'Id Pensum Hist',
+			'id_pensum_hist' => 'Pénsum',
 			'id_departamento' => 'Departamento',
 			'status' => 'Estatus',
 			'fecha' => 'Fecha',

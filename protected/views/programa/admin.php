@@ -42,11 +42,11 @@ $('.search-form form').submit(function(){
 	'filter'=>$model,
 	'columns'=>array(
 		array(
-		'name'=>'status',
-		'filter'=>CHtml::activeTextField($model, 'status'),
-        'value'=>'Status::Model()->FindByPk($data->status)->nombre',
-        'header'=>'Estatus'
-    ),
+				'name'=>'status',
+				'filter'=>CHtml::listData(Status::model()->findAll(),'id_status','nombre'),
+				'value'=>'Status::Model()->FindByPk($data->status)->nombre',
+				'header'=>'Estatus'
+			),
 		//'status',
 		'fecha',
 		'file',
@@ -54,11 +54,12 @@ $('.search-form form').submit(function(){
     'name'=>'id_materia',
     'filter'=>CHtml::activeTextField($model, 'id_materia'),
         'value'=>'Materia::Model()->FindByPk($data->id_materia)->nombre_mat',
-        'header'=>'Materia',
+        'header'=>'Asignatura',
        
     ),
 			array(
 			'class'=>'CButtonColumn',
+			'template'=>'{view}{delete}',
 		),
 	),
 )); ?>

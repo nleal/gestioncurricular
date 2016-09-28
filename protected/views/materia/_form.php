@@ -50,7 +50,7 @@
 
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'Codigo de materia relacionada'); ?>
+		<?php echo $form->labelEx($model,'Código de materia relacionada'); ?>
 		<?php echo $form->textField($model,'cod_materia_padre',array('size'=>10,'maxlength'=>10)); ?>
 		
 	</div>

@@ -7,15 +7,19 @@ $this->breadcrumbs=array(
 	'Create',
 );
 
+	$departamentoListData = CHtml::listData(Departamento::model()->findAll(), 'id_departamento', 'nombre');
+	
 $this->menu=array(
 	array('label'=>'List Programa', 'url'=>array('index')),
 	array('label'=>'Manage Programa', 'url'=>array('admin')),
 );
 ?>
 
+
 <h1>Cargar Programa</h1>
 <hr>
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model,'departamentoListData'=>$departamentoListData)); ?>
+
 
 
 <?php
@@ -24,3 +28,5 @@ $this->menu=array(
         //echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
     }
 ?>
+
+

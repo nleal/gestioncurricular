@@ -82,7 +82,7 @@ Yii::app()->clientScript->registerCoreScript('bbq');
 										array('label'=>'Cargar Usuario', 'url'=>array('/usuario/create'),'visible'=>(Yii::app()->user->checkAccess('director') || Yii::app()->user->checkAccess('admin'))),
                                         array('label'=>'Administrar', 'url'=>array('/usuario/admin'),'visible'=>(Yii::app()->user->checkAccess('director') || Yii::app()->user->checkAccess('admin'))),
 										),'class'=>'dropdown' ),
-                                array('label'=>'Pensum ▼',
+                                array('label'=>'Pénsum ▼',
 										'linkOptions'=> array(
 										'class' => 'dropdown-toggle',
 										'data-toggle' => 'dropdown',),
@@ -115,7 +115,7 @@ Yii::app()->clientScript->registerCoreScript('bbq');
 									,'url'=>array('/agenda/index'),'visible'=>(Yii::app()->user->checkAccess('coordinador') || Yii::app()->user->checkAccess('director')),
 										'items'=>array(
 										array('label'=>'Cargar Agenda', 'url'=>array('/agenda/create'),'visible'=>Yii::app()->user->checkAccess('director')),
-                                        array('label'=>'Consultar', 'url'=>array('/agenda/listaagenda'),'visible'=>(Yii::app()->user->checkAccess('coordinador') || Yii::app()->user->checkAccess('coordinador'))),
+                                        array('label'=>'Consultar', 'url'=>array('/agenda/listaagenda'),'visible'=>(Yii::app()->user->checkAccess('director') || Yii::app()->user->checkAccess('coordinador'))),
                                         array('label'=>'Administrar', 'url'=>array('/agenda/admin'),'visible'=>Yii::app()->user->checkAccess('director')),
 										)
                                 ),

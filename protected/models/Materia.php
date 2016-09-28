@@ -60,11 +60,11 @@ class Materia extends CActiveRecord
 	{
 		return array(
 			'nombre_mat' => 'Asignatura',
-			'descripcion' => 'Descripcion',
+			'descripcion' => 'Descripción',
 			'status' => 'Estatus',
 			'id_departamento' => 'Departamento',
 			'id_materia' => 'Asignatura',
-			'cod_materia' => 'Codigo Asignatura',
+			'cod_materia' => 'Código Asignatura',
 			'anio_final' => 'Año Final',
 			'cod_materia_padre' => 'Código de asignatura padre',
 		);

@@ -22,9 +22,9 @@ function basa2(model){
 </script>
 
 
-<h1>Cargar  Pensum</h1>
+<h1>Cargar  Pénsum</h1>
 <hr>
-<p class="note">En este modulo podra cargar un pensum a cualquier departamento , señalando si es el actual o alguno historico.</p>
+<p class="note">En este módulo podra cargar un pénsum a cualquier departamento , señalando si es el actual o algún histórico.</p>
 
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

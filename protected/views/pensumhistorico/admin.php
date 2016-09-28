@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Administrar Pensum</h1>
+<h1>Administrar Pénsum</h1>
 <hr>
 
 <?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
@@ -42,31 +42,19 @@ $('.search-form form').submit(function(){
 	'filter'=>$model,
 	'columns'=>array(
 		
-//        'id_pensum_hist',
-//        'nombre_dep',
-//        'status',
-//        'fecha',
-//        'file',
-   
-/*    array(
-        'name'=>'id_pensum_hist',
-    'filter'=>CHtml::activeTextField($model, 'id_pensum_hist'),
-        'value'=>'$data->id_pensum_hist',
-        'header'=>'ID'
-    ),*/
     array(
-    'name'=>'id_departamento',
-    'filter'=>CHtml::activeTextField($model, 'id_departamento'),
-        'value'=>'Departamento::Model()->FindByPk($data->id_departamento)->nombre',
-        'header'=>'Departamento',
-       
-    ),
-    array(
-		'name'=>'status',
-		'filter'=>CHtml::activeTextField($model, 'status'),
-        'value'=>'Status::Model()->FindByPk($data->status)->nombre',
-        'header'=>'Estatus'
-    ),
+'name'=>'id_departamento',
+/*'filter'=>CHtml::activeTextField($model, 'id_departamento'),*/
+'filter'=>CHtml::listData(Departamento::model()->findAll(),'nombre','nombre'),
+       'value'=>'Departamento::Model()->FindByPk($data->id_departamento)->nombre',
+       'header'=>'Departamento',
+   ),
+   array(
+			'name'=>'status',
+			'filter'=>CHtml::listData(Status::model()->findAll(),'nombre','nombre'),
+			'value'=>'Status::Model()->FindByPk($data->status)->nombre',
+			'header'=>'Estatus'
+   ),
     array(
 
         'value'=>'$data->fecha',

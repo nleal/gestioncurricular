@@ -150,20 +150,22 @@ class MateriaController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
+	 
+	 /*
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-error_log('entre al update......................');	
+		error_log('entre al update......................');	
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Materia']))
 		{
 			$model->attributes=$_POST['Materia'];
-			/*if($model->save())
-				$this->redirect(array('view','id'=>$model->id_materia));*/
+			//if($model->save())
+				//$this->redirect(array('view','id'=>$model->id_materia));
 				
-error_log('pdm......................');					
+		
 				
 					$r = Materia::model()->find("cod_materia='".$model->cod_materia."' and id_materia <> '".$model->id_materia."'");
 					$r1 = Materia::model()->find("cod_materia='".$model->id_materia."'");
@@ -249,6 +251,76 @@ error_log('pdm......................');
 				
 				
 				
+				
+				
+		}
+
+		$this->render('update',array(
+			'model'=>$model,
+		));
+	}*/
+	
+	
+	
+	
+	public function actionUpdate($id)
+	{
+		$model=$this->loadModel($id);
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Materia']))
+		{
+			$model->attributes=$_POST['Materia'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id_materia));
+				
+				
+					if ($model->cod_materia_padre != null){
+						$cod_p = true;
+						$var = $model->cod_materia_padre;
+						
+						$x = Materia::model()->find("cod_materia='".$model->cod_materia_padre."'");
+				//		error_log('el codigo padre viene con valor');
+						
+						
+					}
+					
+					if(!$x && $cod_p == true){ //Viene un codigo y el codigo no existe 
+							Yii::app()->user->setFlash('error', "El código de la Asignatura a relacionar no existe.");
+			
+						}else if ($cod_p && $x) {
+							
+							if($model->save()){
+					//			error_log('GUARDO LA MATERIA');
+								
+								}  // Si el codigo a relacionar viene nulo debe guardar 
+								error_log('agregar hijos');
+								$cli = new MiCliente();
+								$res = $cli->padres_materia($var);
+						//		error_log('codigo a buscar '.$var);
+								
+								error_log($res);
+								if($res){
+									$res_js=json_decode($res);
+									foreach( $res_js as $itb){
+														
+										$sql = Yii::app()->db->createCommand()->insert('relacion_materia',array('id_materia_hija'=>$model->id_materia,'id_materia_padre'=>$itb->id_materia_padre));			
+										$sql = Yii::app()->db->createCommand()->insert('relacion_materia',array('id_materia_hija'=>$model->id_materia,'id_materia_padre'=>$itb->id_materia_hija));			
+									}
+							//		error_log('SALI del for');
+				
+								}else {
+									
+									$sql = Yii::app()->db->createCommand()->insert('relacion_materia',array('id_materia_hija'=>$model->id_materia,'id_materia_padre'=>$x->id_materia));
+								//	error_log('No trajo informacion');
+								}
+							//error_log('ahora guardar materia');
+							
+									
+									$this->redirect(array('view','id'=>$model->id_materia));
+							} 
 				
 				
 		}
@@ -467,30 +539,75 @@ error_log('pdm......................');
 			
 				$res_ob = $cli->historicomat($id_departamento);	
 			
-			$mPDF1->WriteHTML(" <table border=\"1\"><tr> <td>Codigo</td><td>Materia</td><td>Precedente</td></tr>");
+			$mPDF1->WriteHTML(" <table  style= 'margin-left: 300px;' border='1'><tr> <td align='center'><b>Código</b></td><td align='center'><b>Asignatura</b></td><td align='center'><b>Código(s) de la unidad(es) curricular(es) precedente(s) y periodo de inserción en el plan de estudio</b></td></tr>");
 			
 				if($res_ob)
 				{
 					$res_ob=json_decode($res_ob);						
 					$var = 0;
+					$idmateria = 0;
+					$primero = true; 
 					foreach( $res_ob as $itb)
 					{
-						
+						//error_log($itb->nombre_mat." ".$itb->nivel);
 						
 					
 						
 					if ($var != $itb->nivel){
-						$mPDF1->WriteHTML( "<tr><td colspan='3'>".$itb->descripcion."</td></tr>");	
+						if($cod_print!=''){
+						$mPDF1->WriteHTML( "<tr>
+												<td>".$cod_print."</td>
+												<td>".$mat_print."</td>
+												<td>".$hija_print."</td></tr>");
+							$cod_print = '';
+							$mat_print = '';
+							$hija_print = '';
+							$cod = '';
+						
+					}
+						$mPDF1->WriteHTML( "<tr><td colspan='3'  align='center'><b>".Niveles::Model()->FindByPk($itb->nivel)->descripcion."</b></td></tr>");	
 						$var = $itb->nivel;	
 					}	
+					error_log("Vamos con materia: ".$itb->nombre_mat);
+						if($primero){
+						$cod = $itb->cod_materia;
+						$primero = false;
+						}
 						
-						$mPDF1->WriteHTML( "<tr>
-												<td>".$itb->cod_materia."</td>
-												<td>".$itb->nombre_mat."</td><td>".Materia::Model()->FindByPk($itb->id_materia_padre)->nombre_mat."</td> 
-											</tr>");			
-										
-					
+						if($itb->cod_materia==$cod){
+								$cod_print = $itb->cod_materia;
+								$mat_print = $itb->nombre_mat;
+								
+								if($itb->id_materia_hija!='0')
+								$hija_print .= ' - '. Materia::Model()->FindByPk($itb->id_materia_hija)->cod_materia;
+							
+								$cod = $itb->cod_materia;
+						}else{
+							error_log("Imprimir materia: ".$mat_print." Nivel: ".$var );
+							$mPDF1->WriteHTML( "<tr>
+												<td>".$cod_print."</td>
+												<td>".$mat_print."</td>
+												<td>".$hija_print."</td></tr>");
+							
+							$cod_print = '';
+							$mat_print = '';
+							$hija_print = '';
+							$cod = '';
+							
+							$cod_print = $itb->cod_materia;
+							$mat_print = $itb->nombre_mat;	
+							if($itb->id_materia_hija!='0')
+							$hija_print .= ' - '.Materia::Model()->FindByPk($itb->id_materia_hija)->cod_materia;
+							
+							$cod = $itb->cod_materia;
+							
+							}
+						
 					}
+					$mPDF1->WriteHTML( "<tr>
+												<td>".$cod_print."</td>
+												<td>".$mat_print."</td>
+												<td>".$hija_print."</td></tr>");
 				}
 				
 				$mPDF1->WriteHTML("</table>");

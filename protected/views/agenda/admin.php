@@ -28,7 +28,7 @@ $('.search-form form').submit(function(){
 
 <h1>Administrar Agendas</h1>
 <hr>
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php echo CHtml::link('Busqueda Avanzada','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -42,8 +42,8 @@ $('.search-form form').submit(function(){
 	'columns'=>array(
 		'num_agenda',
 		'lugar',
-		'fecha',
-		'hora',
+/*		'fecha',
+		'hora',*/
 		'fecha_creacion',
 		'fecha_cierre',
 		/*

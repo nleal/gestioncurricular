@@ -9,10 +9,10 @@ $this->breadcrumbs=array(
 ?>
 
 
-<h1>Escuelas</h1>
+<h1>Consultar Agendas</h1>
 <hr>
 <table border='0'>
-    <table border="0"><tr><th>Numero de Agenda</th> <th>Fecha de Cierre</th><th>Fecha de Creacion</th><th>Exportar</th>
+    <table border="0"><tr><th>Número de Agenda</th> <th>Fecha de Cierre</th><th>Fecha de Creación</th><th>Exportar</th>
     
     <?php foreach ($mode1 as $data) { ?>
     

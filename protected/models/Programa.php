@@ -58,7 +58,7 @@ class Programa extends CActiveRecord
 			'status' => 'Estatus',
 			'fecha' => 'Fecha',
 			'file' => 'Documento',
-			'id_materia' => 'Materia',
+			'id_materia' => 'Asignatura',
 		);
 	}
 

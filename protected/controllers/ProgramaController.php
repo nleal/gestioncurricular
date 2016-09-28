@@ -28,11 +28,11 @@ class ProgramaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','listadepartamento','mostrar'),
+				'actions'=>array('index','view','listadepartamento','mostrar','materiaselecionar'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','listadepartamento','mostrar'),
+				'actions'=>array('create','update','listadepartamento','mostrar','materiaselecionar'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -64,6 +64,8 @@ class ProgramaController extends Controller
 	{
 		$model=new Programa;
 
+		$departamentoListData = CHtml::listData(Departamento::model()->findAll(), 'id_departamento', 'nombre');
+
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -84,7 +86,7 @@ class ProgramaController extends Controller
 			
 			
 			
-				$model->id_materia = $_REQUEST['materia_selec'];
+				$model->id_materia = $_REQUEST['id_materia'];
 			
 			
 			$res='true';
@@ -107,8 +109,11 @@ class ProgramaController extends Controller
 				
 		}
 
+error_log('martes');
+
 		$this->render('create',array(
 			'model'=>$model,
+			'departamentoListData'=>$departamentoListData
 		));
 	}
 
@@ -261,5 +266,36 @@ class ProgramaController extends Controller
 				$return['message'] = $div;
 				echo json_encode($return);
 		}
+		
+		
+		
+	public function actionMateriaselecionar() {
+		  
+		  
+		  $id = $_POST['id_departamento'];
+           $cosa = Materia::model()->findAll(
+		 array(
+                      'condition' => 'id_departamento = :id_departamento',
+                      'params'    => array(':id_departamento' => $id)
+                  )
+              );
+              
+              
+              
+              
+$var1 = '<select name="id_materia" id="id_materia"> ';
+	
+ foreach($cosa as $data):
+    $var1 .= '<option value="'.$data->id_materia.'">'.$data->nombre_mat.'</option>';
+		endforeach; 
+	$var1 .= '</select>	';
+              
+              
+				$return['message'] = $var1;
+				echo json_encode($return);
+         
+    }
+
+
 		
 }

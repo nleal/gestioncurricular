@@ -285,17 +285,24 @@ class SiteController extends Controller
 		
 		
 		error_log('mega consulta ');
-		$evaluacion = Yii::app()->db->createCommand(" SELECT n.nivel,  m.cod_materia , r.id_materia_padre , m.nombre_mat , e.descripcion ".
-								"FROM mat_dep_nivel n ".
-								"inner join materia m on m.id_departamento = n.id_departamento ".
-								"inner join relacion_materia  r on m.id_materia= r.id_materia_hija ".
-								"inner join niveles e on e.nivel = n.nivel ".
-								"WHERE n.id_departamento = '".$uname."' and m.status ='S' ORDER by n.nivel ,  m.id_materia" )->queryAll();
+		$evaluacion = Yii::app()->db->createCommand(" SELECT m.id_materia , nombre_mat, cod_materia, r.id_materia_hija, n.nivel ".
+													"from materia m ".
+													"join relacion_materia r ON  r.id_materia_padre =  m.id_materia ".
+													"join mat_dep_nivel n ON n.id_materia = m.id_materia ".
+													"WHERE m.id_departamento = '".$uname."'   and m.status = 1 ".
+													"UNION ".
+													"SELECT  m.id_materia , nombre_mat, cod_materia, '0', n.nivel  ".
+													"from materia m ".
+													"join mat_dep_nivel n ON n.id_materia = m.id_materia ".
+													"WHERE m.id_departamento = '".$uname."'    and m.status = 1 and  ".
+													"m.id_materia not in (SELECT p.id_materia_padre ".
+                                                     "FROM relacion_materia p) ".
+													"ORDER BY nivel, id_materia  " )->queryAll();
 		
 		
 			if(count($evaluacion)>0){
 					foreach($evaluacion as $it){
-						$res_js[] = array("descripcion"=>$it['descripcion'],"nivel"=>$it['nivel'],"cod_materia"=>$it['cod_materia'] ,"id_materia_padre"=>$it['id_materia_padre'],"nombre_mat"=>$it['nombre_mat']); 
+						$res_js[] = array("id_materia"=>$it['id_materia'],"nombre_mat"=>$it['nombre_mat'],"cod_materia"=>$it['cod_materia'] ,"id_materia_hija"=>$it['id_materia_hija'],"nivel"=>$it['nivel']); 
 					}
 					
 					return json_encode($res_js);

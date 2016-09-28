@@ -27,7 +27,7 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'Numero de Agenda'); ?>
+		<?php echo $form->labelEx($model,'Número de Agenda'); ?>
 		<?php echo $form->dropDownList($model,'id_agenda', CHtml::listData( Agenda::model()->findAll(
 		'status=:status', array(':status' => '1')),	
     'id_agenda', 'id_agenda'),array('empty'=>'Seleccione...', 'id_agenda'=>'id_agenda')); ?>

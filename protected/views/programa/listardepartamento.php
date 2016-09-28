@@ -14,7 +14,7 @@ $this->breadcrumbs=array(
 
 		$(document).ready(function(){
 	
-		$('#depart').val('Computacion');
+		$('#depart').val('2');
 		
 	    $("select[name=depart]").change(function(){
 		   

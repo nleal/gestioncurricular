@@ -15,8 +15,47 @@
     'htmlOptions' => array('enctype' => 'multipart/form-data'),
 	'enableAjaxValidation'=>false,
 )); ?>
-<?php echo CHtml::link('Cargar Nueva Asignatura',Yii::app()->createUrl('materia/create')) ;?>
+
 <p class="note">Los campos con  <span class="required">*</span> son obligatorios</p>
+
+
+
+
+
+
+<script>
+
+		$(document).ready(function(){
+	
+		$('#depart').val('2');
+		
+	    $("select[name=depart]").change(function(){
+		   
+		   id_departamento = $('select[name=depart]').val();
+		   
+		   $.ajax({
+	       //url: "mostrarmatriz",
+	       url: <?php echo "'".CController::createUrl('programa/materiaselecionar')."'"; ?>,
+               
+	       type: "POST",
+	       data: {'id_departamento' : $('select[name=depart]').val()},
+	       dataType: 'json',
+	       success: function(data){
+			   $("#mostrar_matriz").html(data.message);
+	       },
+	       error: function(data){
+			   console.log(data);
+			   alert('ERROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR');
+			   },
+	        });
+	    });
+	    
+	    $('#depart').trigger('change');	
+	    
+	});
+	</script>
+
+
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -53,58 +92,60 @@
 	</div>
 
 
-<?php $model_deps=Departamento::model()->findAll(); 
-			foreach($model_deps as $model_dep){
-echo '				
-<fieldset>
-    <legend><b>'.$model_dep->nombre.'</b> <a href="#" id="show" onclick="mostrar('.$model_dep->id_departamento.')">+</a></legend>';
+
+<?php $model1=Departamento::model()->findAll(); ?>
+
+<div class="row">
+	<?php echo $form->labelEx($model,'Departamento'); ?>
+<select name="depart" id="depart">
+	
+<?php foreach($model1 as $data): ?>
+	
+    <option value="<?php echo $data->id_departamento?>"><?php echo $data->nombre?></option>
+<?php endforeach; ?>
+ </select>	
+<div>
 
 
-$Criteria = new CDbCriteria();
-$Criteria->addCondition("id_departamento =".$model_dep->id_departamento);
-$model_mats=Materia::model()->findAll($Criteria);
+  <div class="row">
+	  <?php $departamentoListData = CHtml::listData(Departamento::model()->findAll(), 'id_departamento', 'nombre');?>
+	  <?php $model1=Departamento::model()->findAll();
+	  
+	  /*foreach( $model1 as $model1_1){
+			echo $model1_1['id_departamento'];
+		  }
+	  */
+	  ?>
+	  
+	  
+        <?php //echo $form->labelEx($model1, $model1['id_departamento']); ?>
+        <?php
+       /* echo $form->dropDownList($model1, 'id_departamento', $departamentoListData, array(
+            'ajax'=>array(
+                'type'=>'POST',
+                'url'=>$this->createUrl('materiaselecionar'),
+                'update'=>'#' . CHtml::activeId($model, 'id_materia')
+            ), 'prompt'=>'-- Selecciona Departamento --'
+        ));*/
+        ?>
+
+   </div>
+
+<div class="row">
+	
+	<?php echo $form->labelEx($model,'Asignatura'); ?>
+<div id = 'mostrar_matriz' name = 'mostrar_matriz'></div>
+</div>
 
 
-echo '<div id="element_'.$model_dep->id_departamento.'" style="display: none;" >
-		<div id="close">
-			<a href="#" id="hide" onclick="oculta('.$model_dep->id_departamento.')">cerrar</a>
-		</div>
-	  <table>';
-		
-$num_td = 0;
-/*
- * ATENCION 
- * Como hacer para que elija solo un chek box????????????????????????????
- * 
- * 
- * 
- * 
- * */
-
-foreach($model_mats as $model_mat){
-		
-		if($num_td==0){
-			echo '<tr>';
-			}
-			
-		if($num_td<4){
-			//echo '<td><input type="radio" id="'.$model_dep->id_departamento.'" name="CB[]'.$model_mat->id_materia.'" value="'.$model_mat->id_materia.'">'.$model_mat->nombre_mat.'</input></td>';
-			echo '<td><input type="radio"  name="materia_selec" value="'.$model_mat->id_materia.'">'.$model_mat->nombre_mat.'</input></td>';
-			
-			$num_td++;
-		}else{
-			$num_td=0;
-			echo '</tr>';
-		}
-		
-		
-		//echo $form->checkBox($model,'id_materia', array('value'=>$model_mat->id_materia,'checked'=>'checked'));
-		
-	}
-	echo '</table>';
-  echo '</fieldset> ';						
-}
-?>
+      <div class="row">
+                <?php //echo $form->labelEx($model,'id_materia'); ?>
+        <?php //echo $form->dropDownList($model,'id_materia',array(
+        //'prompt' => 'Seleccione un Materia...'
+        //)
+        //); ?>
+        <?php //echo $form->error($model,'id_materia'); ?>
+        </div>
 
 
 

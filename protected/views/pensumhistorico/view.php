@@ -8,24 +8,28 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Pensum', 'url'=>array('index')),
-	array('label'=>'Nuevo Pensum', 'url'=>array('create')),
-	array('label'=>'Actualizar Pensum', 'url'=>array('update', 'id'=>$model->id_pensum_hist)),
-	array('label'=>'Eliminar Pensum', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_pensum_hist),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Administrar Pensum', 'url'=>array('admin')),
+	array('label'=>'Listar Pénsum', 'url'=>array('index')),
+	array('label'=>'Nuevo Pénsum', 'url'=>array('create')),
+	array('label'=>'Actualizar Pénsum', 'url'=>array('update', 'id'=>$model->id_pensum_hist)),
+	array('label'=>'Eliminar Pénsum', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_pensum_hist),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Administrar Pénsum', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Consulta Pensum #<?php echo $model->id_pensum_hist; ?></h1>
+<h1>Consulta Pénsum #<?php echo $model->id_pensum_hist; ?></h1>
 <hr>
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id_pensum_hist',
+		
 		'id_departamento',
 		'status',
 		'fecha',
-		'file',
+		array(               
+              'label'=> 'Documento',
+              'type'=>'raw',
+              'value'=>CHtml::link($model->file, Yii::app()->request->baseUrl."/uploads/".$model->file,array("target"=>"_blank")),
+                ),
 	),
 )); ?>
 

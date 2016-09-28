@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 ?>
 
 
-<h1>Pensum Academico</h1>
+<h1>Pénsum Académico</h1>
 <hr>
 <table border="1">
     <table class="normal"><tr><th>#</th> <th>Carrera</th><th>Exportar</th>

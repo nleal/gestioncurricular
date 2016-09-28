@@ -15,10 +15,10 @@ $this->breadcrumbs=array(
 ?>
 
 
-<h1>Consultar Pensum</h1>
+<h1>Consultar Pénsum</h1>
 <hr>
 
-    <table><tr> <th>Departamentos</th><th>Actual</th><th>Historico</th>
+    <table><tr> <th>Departamentos</th><th>Actual</th><th>Histórico</th>
     
     <?php foreach ($res_js as $data) { ?>
     
